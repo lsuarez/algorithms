@@ -1,5 +1,7 @@
 package com.linked.list;
 
+import java.util.Stack;
+
 public class Palindrome {
 
     public static boolean isPalindrome(LinkedList l1){
@@ -13,7 +15,26 @@ public class Palindrome {
             l2Node = l2Node.next;
         }
 
-        return l1Node == null && l2Node ==null;
+        return true;
+    }
+    public static boolean isPalindromeUsingStack(LinkedList l1){
+        Stack<Integer> st = new Stack<>();
+
+        Node current = l1.head;
+        while(current != null){
+            st.push(current.data);
+            current=current.next;
+        }
+        int large = l1.getSize()/2, i=0;
+        current = l1.head;
+        while (i<large){
+            int value =st.pop();
+            if( value != current.data)
+                return false;
+            current = current.next;
+            i++;
+        }
+        return true;
     }
     private static Node reverseList(Node node){
 
@@ -30,11 +51,12 @@ public class Palindrome {
         LinkedList l1 = new LinkedList();
         l1.append(1);
         l1.append(0);
-        l1.append(3);
+        l1.append(0);
         l1.append(1);
 
 
         //Success scenario
-        System.out.println(isPalindrome(l1));
+       // System.out.println(isPalindrome(l1));
+        System.out.println(isPalindromeUsingStack(l1));
     }
 }

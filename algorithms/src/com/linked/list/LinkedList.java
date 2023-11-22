@@ -13,15 +13,6 @@ class LinkedList {
         this.head = newNode;
         size++;
     }
-    int getByPosition(int pos){
-        int value =-1;
-        if(pos>size)
-            return value;
-        Node current = this.head;
-        Node temp = null;
-        return 0;
-    }
-
 
     int getSize(){
         return this.size;
