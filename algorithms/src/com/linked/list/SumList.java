@@ -7,12 +7,12 @@ public class SumList {
         LinkedList l1 = new LinkedList();
         l1.append(5);
         l1.append(1);
-        l1.append(2);
+        l1.append(4);
 
         int size =l1.getSize();
         LinkedList l2 = new LinkedList();
         l2.append(1);
-        l2.append(2);
+        l2.append(9);
         l2.append(5);
         l2.append(9);
 
@@ -40,11 +40,21 @@ public class SumList {
             next2=next2.next;
         }
         while(next1!=null){
-            result.append(next1.data);
+            if(carry == 1) {
+                result.append(next1.data + carry);
+                carry =0;
+            }else{
+                result.append(next1.data);
+            }
             next1=next1.next;
         }
         while(next2!=null){
-            result.append(next2.data);
+            if(carry == 1) {
+                result.append(next2.data+carry);
+                carry =0;
+            }else{
+                result.append(next2.data);
+            }
             next2=next2.next;
         }
         return result;
