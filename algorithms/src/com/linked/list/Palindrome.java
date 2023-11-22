@@ -25,14 +25,13 @@ public class Palindrome {
             st.push(current.data);
             current=current.next;
         }
-        int large = l1.getSize()/2, i=0;
+        int large = l1.getSize()/2;
         current = l1.head;
-        while (i<large){
+        for(int i=0;i<large; i++){
             int value =st.pop();
             if( value != current.data)
                 return false;
             current = current.next;
-            i++;
         }
         return true;
     }
