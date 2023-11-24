@@ -13,6 +13,13 @@ class LinkedList {
         this.head = newNode;
         size++;
     }
+    void appendAnExistingOne(Node node){
+        if (size != 0) {
+            node.next = this.head;
+        }
+        this.head = node;
+        size++;
+    }
 
     int getSize(){
         return this.size;
