@@ -28,18 +28,5 @@ class LinkedList {
         return this.size;
     }
 
-    public int getFirstRepeatedNode(LinkedList list) {
-        Map<Integer, Node> visited = new HashMap<>();
-        Node current = list.head;
-        while(current!=null){
-            if(visited.containsKey(current.data)){
-                return current.data;
-            }else{
-                visited.put(current.data, current);
-            }
-            current = current.next;
-        }
-        return -1;
-    }
 }
 

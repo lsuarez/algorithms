@@ -24,8 +24,30 @@ public class LinkedListTail {
         return head;
     }
 
+
     int getSize(){
         return this.size;
+    }
+
+    public int getIntersectedNode(){
+
+        Node slow =this.head;
+        Node fast = this.head;
+        while(slow!=null && fast!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                break;
+            }
+        }
+        if(fast == null || slow == null)
+            return -1;
+        slow = this.head;
+        while(slow != fast){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow.data;
     }
 
 }
