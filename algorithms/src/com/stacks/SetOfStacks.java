@@ -23,7 +23,6 @@ public class SetOfStacks {
             t.next = currentStack.top;
             currentStack.top = t;
             SetOfStacks lastStack = getLastStack();
-           // this.next = currentStack;
             currentStack.currentCapacity ++;
 
             if(currentStack.currentCapacity<currentStack.maxCapacity)
