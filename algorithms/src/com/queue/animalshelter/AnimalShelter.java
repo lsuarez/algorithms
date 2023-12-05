@@ -12,7 +12,7 @@ public class AnimalShelter {
     private SinglyLinkedList<Dog> dogs = new SinglyLinkedList<>();
     private SinglyLinkedList<Cat> cats = new SinglyLinkedList<>();
 
-    public void arrives(Animal pet){
+    public void enqueue(Animal pet){
         if(pet instanceof Cat)
             cats.insert((Cat)pet);
         else
@@ -25,26 +25,26 @@ public class AnimalShelter {
         System.out.println("****** CATS ******");
         cats.displaylist();
     }
-    public void queueCat(){
+    public void dequeueCat(){
         if(!cats.isEmpty())
             System.out.println("            CAT ADOPTED: " + cats.remove().toString());
         else
             System.out.println("WE DON'T HAVE CATS A THIS MOMENT....");
     }
-    public void queueDog(){
+    public void dequeueDog(){
         if(!dogs.isEmpty())
             System.out.println("            DOG ADOPTED:"+ dogs.remove().toString());
         else
             System.out.println("WE DON'T HAVE DOGS A THIS MOMENT....");
     }
-    public void queueAny(){
+    public void dequeueAny(){
         if(dogs.isEmpty() && cats.isEmpty())
             System.out.println("WE DON'T HAVE ANY PET TO BE ADOPTED... ");
         else{
             if(dogs.isEmpty())
-                queueCat();
+                dequeueCat();
             else
-                queueDog();
+                dequeueDog();
         }
 
     }
@@ -55,15 +55,15 @@ public class AnimalShelter {
         Animal logan= new Cat("2. logan");
         Animal morcita= new Dog("1. morcita");
         Animal harry= new Dog("2. harry");
-        shelter.arrives(snuffy);
-        shelter.arrives(logan);
-        shelter.arrives(morcita);
-        shelter.arrives(harry);
+        shelter.enqueue(snuffy);
+        shelter.enqueue(logan);
+        shelter.enqueue(morcita);
+        shelter.enqueue(harry);
         shelter.currentAnimals();
-        shelter.queueCat();
+        shelter.dequeueCat();
         shelter.currentAnimals();
-        shelter.queueCat();
-        shelter.queueAny();
+        shelter.dequeueCat();
+        shelter.dequeueAny();
         shelter.currentAnimals();
 
     }
