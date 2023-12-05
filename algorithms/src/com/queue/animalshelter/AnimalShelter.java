@@ -1,5 +1,7 @@
 package com.queue.animalshelter;
 
+import java.util.EmptyStackException;
+
 /**
  * An Animal Shelter, which holds only dogs and cats, operates on a strictly "first in, first out"
  * basis. People must adopt either the oldest (based on arrival time) of all animals at the shelter,
@@ -21,35 +23,59 @@ public class AnimalShelter {
     public void currentAnimals(){
 
         System.out.println("****** DOGS ******");
-        dogs.displaylist();
+        dogs.displayList();
         System.out.println("****** CATS ******");
-        cats.displaylist();
+        cats.displayList();
     }
-    public void dequeueCat(){
-        if(!cats.isEmpty())
-            System.out.println("            CAT ADOPTED: " + cats.remove().toString());
-        else
+    public Cat dequeueCat() throws Exception{
+        Cat cat = null;
+        if(!cats.isEmpty()){
+            cat = cats.remove();
+            System.out.println("            CAT ADOPTED: " + cat.toString());
+        } else
             System.out.println("WE DON'T HAVE CATS A THIS MOMENT....");
+        return cat;
     }
-    public void dequeueDog(){
-        if(!dogs.isEmpty())
-            System.out.println("            DOG ADOPTED:"+ dogs.remove().toString());
-        else
+    public Dog dequeueDog() throws Exception {
+        Dog dog = null;
+        if(!dogs.isEmpty()) {
+            dog = dogs.remove();
+            System.out.println("            DOG ADOPTED:" + dog.toString());
+        }else
             System.out.println("WE DON'T HAVE DOGS A THIS MOMENT....");
+        return dog;
     }
-    public void dequeueAny(){
+    public Animal dequeueAny()throws Exception{
+        Animal petCat =null, petDog = null, pet =null;
         if(dogs.isEmpty() && cats.isEmpty())
             System.out.println("WE DON'T HAVE ANY PET TO BE ADOPTED... ");
         else{
-            if(dogs.isEmpty())
-                dequeueCat();
-            else
-                dequeueDog();
-        }
 
+        }
+        if(!dogs.isEmpty())
+            return dequeueDog();
+        if(!cats.isEmpty())
+            return dequeueCat();
+        petCat = cats.peek();
+        petDog = dogs.peek();
+
+        if(petCat.getExtraInformation().getArrivalDate().isAfter(petDog.getExtraInformation().getArrivalDate()))
+            try {
+                pet = dequeueDog();
+            }catch(Exception e){
+                pet = dequeueCat();
+            }
+        else {
+            try {
+                pet = dequeueCat();
+            }catch(Exception e) {
+                pet = dequeueDog();
+            }
+        }
+        return pet;
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws Exception{
         AnimalShelter shelter = new AnimalShelter();
         Animal snuffy= new Cat("1. snuffy");
         Animal logan= new Cat("2. logan");
@@ -59,8 +85,6 @@ public class AnimalShelter {
         shelter.enqueue(logan);
         shelter.enqueue(morcita);
         shelter.enqueue(harry);
-        shelter.currentAnimals();
-        shelter.dequeueCat();
         shelter.currentAnimals();
         shelter.dequeueCat();
         shelter.dequeueAny();

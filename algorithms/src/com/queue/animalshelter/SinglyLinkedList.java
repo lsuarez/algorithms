@@ -35,7 +35,7 @@ public class SinglyLinkedList<T> {
         }
         size++;
     }
-    public void displaylist() {
+    public void displayList() {
         Node current = head;
         if(head == null) {
             System.out.println("The given list is empty");
@@ -56,6 +56,11 @@ public class SinglyLinkedList<T> {
     }
     public boolean isEmpty(){
         return size<=0;
+    }
+    public T peek(){
+        if(this.head == null)
+            throw new EmptyStackException();
+        return (T)this.head.data;
     }
 
 }

@@ -2,6 +2,7 @@ package com.queue.animalshelter;
 
 public class Animal {
     private String name;
+    private ExtraInformation extraInformation= new ExtraInformation();
     public void speak(){
 
     }
@@ -21,10 +22,19 @@ public class Animal {
         this.name = name;
     }
 
+    public ExtraInformation getExtraInformation() {
+        return extraInformation;
+    }
+
+    public void setExtraInformation(ExtraInformation extraInformation) {
+        this.extraInformation = extraInformation;
+    }
+
     @Override
     public String toString() {
         return "Animal{" +
                 "name='" + name + '\'' +
+                ", extraInformation=" + extraInformation +
                 '}';
     }
 }
