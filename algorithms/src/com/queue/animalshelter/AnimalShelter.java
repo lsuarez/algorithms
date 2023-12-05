@@ -1,9 +1,4 @@
-package com.queue;
-
-import com.queue.animalshelter.Animal;
-import com.queue.animalshelter.Cat;
-import com.queue.animalshelter.Dog;
-import com.queue.animalshelter.SinglyLinkedList;
+package com.queue.animalshelter;
 
 /**
  * An Animal Shelter, which holds only dogs and cats, operates on a strictly "first in, first out"
