@@ -22,11 +22,10 @@ public class ValidateAnagram {
         str1= str1.trim().toLowerCase();
         str2= str2.trim().toLowerCase();
 
-        if(str1.length() != str2.length())
-            return false;
-
         HashMap<Character, Integer> stored = new HashMap<>();
         for(char c: str1.toCharArray()){
+            if(c==' ')
+                continue;
             if(stored.containsKey(c)){
                 int total = stored.get(c);
                 total++;
@@ -36,6 +35,8 @@ public class ValidateAnagram {
                 stored.put(c, 1);
         }
         for(char c: str2.toCharArray()) {
+            if(c==' ')
+                continue;
             if(stored.containsKey(c)){
                 int total = stored.get(c);
                 total--;
@@ -57,5 +58,7 @@ public class ValidateAnagram {
         System.out.println(isAnagram("Ronald Wilson Reagan","Insane anglo warlord"));
         //'Georgia', 'navy sin panel'
         System.out.println(isAnagram("Georgia","navy sin panel"));
+        System.out.println(isAnagram("William Shakespeare","I am a weakish speller"));
+
     }
 }
