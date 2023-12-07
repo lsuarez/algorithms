@@ -1,6 +1,6 @@
-package com.search;
+package com.search.binarysearch;
 
-public class BinarySearch {
+public class BinarySearchRecursive {
 
     public static int getPositionOf(int num, int numbers[]) throws Exception{
 
@@ -23,7 +23,7 @@ public class BinarySearch {
     public static void main(String args[])throws Exception{
         int[] numbers = {0,1,2,3,4,5,6,7,8,9,10};
 
-        System.out.println(BinarySearch.getPositionOf(9, numbers));
+        System.out.println(BinarySearchRecursive.getPositionOf(9, numbers));
 
     }
 }
