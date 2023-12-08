@@ -45,6 +45,6 @@ public class SortWithRecursion {
         a2=sort(a2, 0, a2.length);
         a2=sort(a2, 0, a2.length);
         print(a2);
-        //Output: 1 2 3 4 6 9 7 12 90
+        //Output: 1 2 3 4 5 6 7 8 9 10 11
     }
 }
