@@ -26,9 +26,9 @@ public class Exponent {
         return result *result * base;
     }
     public static void main(String args[]){
-        System.out.println("Calculate exponent of 2 to 14 ="+exponent(2, 14)); //Calculate exponent of 2 to 8 =256
+        System.out.println("Calculate exponent of 2 to 14 ="+exponent(2, 14)); //Calculate exponent of 2 to 14 =16384
         System.out.println("Calculate exponent of 3 to 5 ="+exponent(3, 5)); //Calculate exponent of 3 to 5 =243
-        System.out.println("Calculate exponent of 2 to 10 ="+exponent(2, 10)); //Calculate exponent of 2 to 6 =16
+        System.out.println("Calculate exponent of 2 to 10 ="+exponent(2, 10)); //Calculate exponent of 2 to 10 =1024
         System.out.println("Calculate exponent of 4 to 1 ="+exponent(4, 1)); //Calculate exponent of 4 to 1 =4
         System.out.println("Calculate exponent of 4 to 1 ="+exponent(4, 0)); //Calculate exponent of 4 to 1 =-1
     }
