@@ -4,32 +4,33 @@ package com.recursion;
          */
 
 public class Exponent {
-    private static int array[];
-    private static int calculate(int base, int exp){
-        if(exp == 1) {
-            array[0]=base;
+
+    /*
+    si n==1 entonces retornas base;
+    n es multiplo de 2 entonces retorno calculo(n/2)* calculo(n/2)
+    si n no es multiplo de 2 retorno calculo(n/2)* calculo(n/2) * base
+    Big O: Log(exp)
+     */
+    public static int pow(int base, int exp){
+        if(exp == 0)
+            return 1;
+        if(exp ==1)
             return base;
-        }
-       int result =  calculate(base, exp-1);
-        array[exp-1]=base* result;
-       return array[exp-1];
-    }
-    public static int exponent(int base, int exp){
-        array = new int[exp];
-        if(base<=0 || exp == 0)
-            return -1;
-        if(exp == 1)
-            return base;
-        int result =  calculate(base, exp/2);
+        int result = pow(base, exp / 2);
+        result = result * result;
         if(exp%2==0)
-            return result*result;
-        return result *result * base;
+            return result;
+        else
+            return result * base;
+
     }
     public static void main(String args[]){
-        System.out.println("Calculate exponent of 2 to 14 ="+exponent(2, 14)); //Calculate exponent of 2 to 14 =16384
-        System.out.println("Calculate exponent of 3 to 5 ="+exponent(3, 5)); //Calculate exponent of 3 to 5 =243
-        System.out.println("Calculate exponent of 2 to 10 ="+exponent(2, 10)); //Calculate exponent of 2 to 10 =1024
-        System.out.println("Calculate exponent of 4 to 1 ="+exponent(4, 1)); //Calculate exponent of 4 to 1 =4
-        System.out.println("Calculate exponent of 4 to 1 ="+exponent(4, 0)); //Calculate exponent of 4 to 1 =-1
+        System.out.println("Calculate pow of 2 to 14 ="+pow(1, 1000_000_000)); //Calculate pow of 2 to 14 =16384
+        System.out.println("Calculate pow of 3 to 5 ="+pow(3, 5)); //Calculate pow of 3 to 5 =243
+        System.out.println("Calculate pow of 2 to 10 ="+pow(2, 10)); //Calculate pow of 2 to 10 =1024
+        System.out.println("Calculate pow of 4 to 1 ="+pow(4, 1)); //Calculate pow of 4 to 1 =4
+        System.out.println("Calculate pow of 4 to 1 ="+pow(4, 0)); //Calculate pow of 4 to 1 =-1
     }
+
+
 }
