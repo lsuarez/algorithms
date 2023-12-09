@@ -5,12 +5,13 @@ package com.recursion;
 
 public class Exponent {
     private static int calculate(int base, int exp){
-        if(exp==1)
+        if(exp == 1)
             return base;
         if(exp==2)
             return base*base;
-        int mid=exp/2;
-       int result =  calculate(base, mid);
+        if(exp ==3)
+            return base * calculate(base, 2);
+       int result =  calculate(base, exp/2);
        return result * result;
     }
     public static int exponent(int base, int exp){
