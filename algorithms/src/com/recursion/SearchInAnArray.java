@@ -23,7 +23,7 @@ public class SearchInAnArray {
      *      la mitad de la mitad del arreglo hacia la izquierda
      * Si por el contrario mi arreglo en posicion mid es True entonces
      *      encontrar la mitad del arreglo hacia la derecha
-     *
+     *  BiogO Log(n)
      */
 
     public static int searchPosition(boolean array[], int low, int high){
