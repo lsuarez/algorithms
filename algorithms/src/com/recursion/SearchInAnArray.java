@@ -36,7 +36,7 @@ public class SearchInAnArray {
         if(!array[mid]) {
             if(mid == 0)
                 return -1;
-            if (mid-1 <= n && array[mid-1])
+            if (array[mid-1])
                 return mid - 1;
             else
                 return searchPosition(array, 0, mid);
