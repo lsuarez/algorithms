@@ -38,8 +38,6 @@ public class CountingWords {
                     new Comparator<Map.Entry<String,Integer>>() {
                         @Override
                         public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                            int leng1 =o1.getKey().length();
-                            int len2 = o2.getKey().length();
                             int res = (Integer.valueOf(o1.getKey().length())).compareTo(o2.getKey().length());
                             if(o1.getKey().toUpperCase().equals(o2.getKey().toUpperCase())) {
                                 int compare =o1.getKey().compareTo(o2.getKey());
