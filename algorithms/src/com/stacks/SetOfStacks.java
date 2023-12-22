@@ -25,7 +25,7 @@ public class SetOfStacks {
             SetOfStacks lastStack = getLastStack();
             currentStack.currentCapacity ++;
 
-            if(currentStack.currentCapacity<currentStack.maxCapacity)
+            if(currentStack.currentCapacity< maxCapacity)
                 lastStack.next = currentStack;
 
         }
@@ -34,7 +34,7 @@ public class SetOfStacks {
 
     private SetOfStacks getLastStack() {
         SetOfStacks stack = this;
-        while(stack.currentCapacity == stack.maxCapacity  && stack.next!= null){
+        while(stack.currentCapacity == maxCapacity  && stack.next!= null){
             stack=stack.next;
         }
         return stack;
@@ -46,14 +46,14 @@ public class SetOfStacks {
         if(stack == null){
             return new SetOfStacks();
         }
-        if(stack.currentCapacity<stack.maxCapacity){
+        if(stack.currentCapacity< maxCapacity){
             return stack;
         }else{
             return getNextStack(stack);
         }
     }
     private class StackNode{
-        private int data;
+        private final int data;
         private StackNode next;
 
         public StackNode(int data){

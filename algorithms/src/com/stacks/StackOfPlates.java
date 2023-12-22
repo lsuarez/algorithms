@@ -10,7 +10,7 @@ package com.stacks;
  */
 
 public class StackOfPlates {
-    public static void main(String args[]){
+    public static void main(String[] args){
         SetOfStacks stack = new SetOfStacks();
         stack.push(1);
         stack.push(2);

@@ -18,7 +18,7 @@ public class CountingWords {
     public static HashMap<String, Integer> countWords(String phrase){
         HashMap<String, Integer> counter = new HashMap<>();
         Arrays.stream(phrase.trim().split(" ")).forEach(word->{
-            word =cleanWord(word);
+            word = word.replaceAll("[^a-zA-Z]", "");
             if(counter.containsKey(word)){
                 int total = counter.get(word);
                 counter.remove(word);
@@ -30,15 +30,7 @@ public class CountingWords {
         });
         return counter;
     }
-  //  a- 65 to 90   97 to 122
-    private static String cleanWord(String word){
-        StringBuilder newWord=new StringBuilder();
-        for(char l:word.toCharArray()){
-            if(l>=65 && l<=90 || l>=97 && l<=122)
-                newWord.append(l);
-        }
-        return newWord.toString();
-    }
+
     // Sorted [I - 1, is - 2, fun - 3, Fun - 1, think - 1, coding - 1]
     private static SortedSet<Map.Entry<String,Integer>>  ordering(HashMap<String, Integer> words){
 
@@ -62,7 +54,7 @@ public class CountingWords {
     }
 
     public static void main(String args[]){
-        HashMap<String, Integer> map = countWords("I think coding is fun.. fun Fun is fun!");
+        HashMap<String, Integer> map = countWords("I33 think coding is fun.. fun Fun is fun!");
         System.out.println(map.toString());
         System.out.println(ordering(map));
     }

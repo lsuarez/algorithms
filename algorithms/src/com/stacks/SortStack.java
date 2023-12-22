@@ -10,7 +10,7 @@ import java.util.EmptyStackException;
  */
 
 public class SortStack {
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         Stack stack = new Stack();
         stack.pushOrdered(5);
@@ -26,7 +26,7 @@ class Stack{
     private Stack temp;
 
     private static class StackNode{
-        private int data;
+        private final int data;
         private StackNode next;
         public StackNode(int data){
             this.data = data;

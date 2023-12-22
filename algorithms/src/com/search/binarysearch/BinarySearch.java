@@ -21,7 +21,7 @@ public class BinarySearch {
 
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         int[]array ={23,54,12,9,0,4};
         System.out.println(search(9, array));
         System.out.println(search(889, array));

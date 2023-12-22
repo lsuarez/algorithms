@@ -2,11 +2,11 @@ package com.search.binarysearch;
 
 public class BinarySearchRecursive {
 
-    public static int getPositionOf(int num, int numbers[]) throws Exception{
+    public static int getPositionOf(int num, int[] numbers) throws Exception{
 
         return findNumber(num, numbers, 0, numbers.length);
     }
-    private static int findNumber(int num, int numbers[], int low, int high) throws Exception {
+    private static int findNumber(int num, int[] numbers, int low, int high) throws Exception {
         int middle = (high-low)/2;
         middle = low + middle;
         if(low <0 || high>numbers.length || middle>=numbers.length)
@@ -20,7 +20,7 @@ public class BinarySearchRecursive {
         return 0;
     }
 
-    public static void main(String args[])throws Exception{
+    public static void main(String[] args)throws Exception{
         int[] numbers = {0,1,2,3,4,5,6,7,8,9,10};
 
         System.out.println(BinarySearchRecursive.getPositionOf(9, numbers));

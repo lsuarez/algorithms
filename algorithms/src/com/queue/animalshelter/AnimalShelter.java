@@ -1,6 +1,5 @@
 package com.queue.animalshelter;
 
-import java.util.EmptyStackException;
 
 /**
  * An Animal Shelter, which holds only dogs and cats, operates on a strictly "first in, first out"
@@ -11,13 +10,13 @@ import java.util.EmptyStackException;
  * LinkedList data structure.
  */
 public class AnimalShelter {
-    private SinglyLinkedList<Dog> dogs = new SinglyLinkedList<>();
-    private SinglyLinkedList<Cat> cats = new SinglyLinkedList<>();
+    private final SinglyLinkedList<Dog> dogs = new SinglyLinkedList<>();
+    private final SinglyLinkedList<Cat> cats = new SinglyLinkedList<>();
 
     public void enqueue(Animal pet){
-        if(pet instanceof Cat)
+        if(pet instanceof Cat) {
             cats.insert((Cat)pet);
-        else
+        } else
             dogs.insert((Dog)pet);
     }
     public void currentAnimals(){
@@ -27,7 +26,8 @@ public class AnimalShelter {
         System.out.println("****** CATS ******");
         cats.displayList();
     }
-    public Cat dequeueCat() throws Exception{
+    public Cat dequeueCat(){
+        System.out.println("DequeueCat .....");
         Cat cat = null;
         if(!cats.isEmpty()){
             cat = cats.remove();
@@ -36,17 +36,21 @@ public class AnimalShelter {
             System.out.println("WE DON'T HAVE CATS A THIS MOMENT....");
         return cat;
     }
-    public Dog dequeueDog() throws Exception {
+    public Dog dequeueDog() {
+        System.out.println("DequeueDog .....");
         Dog dog = null;
         if(!dogs.isEmpty()) {
             dog = dogs.remove();
-            System.out.println("            DOG ADOPTED:" + dog.toString());
+            System.out.println("            DOG ADOPTED: " + dog.toString());
         }else
             System.out.println("WE DON'T HAVE DOGS A THIS MOMENT....");
         return dog;
     }
-    public Animal dequeueAny()throws Exception{
-        Animal petCat =null, petDog = null, pet =null;
+    public Animal dequeueAny(){
+        System.out.println("DequeueAny .....");
+        Animal petCat =null;
+        Animal petDog = null;
+        Animal pet =null;
         if(dogs.isEmpty() && cats.isEmpty())
             System.out.println("WE DON'T HAVE ANY PET TO BE ADOPTED... ");
         else{
@@ -75,7 +79,7 @@ public class AnimalShelter {
         return pet;
     }
 
-    public static void main(String args[]) throws Exception{
+    public static void main(String[] args){
         AnimalShelter shelter = new AnimalShelter();
         Animal snuffy= new Cat("1. snuffy");
         Animal logan= new Cat("2. logan");

@@ -27,7 +27,7 @@ public class Recursion {
             min=array[position];
         return findMinimumInAnArray(array,position+1,min);
     }
-    public static void main(String args[]){
+    public static void main(String[] args){
         int[]array = {1,9,23,-4};
         System.out.println("Sum:"+ sumItemsInAnArray(array,0));
         System.out.println("MAX:"+findMaximInAnArray(array,0,Integer.MIN_VALUE));

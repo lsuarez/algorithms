@@ -1,4 +1,4 @@
-package com.recursion;
+package com.functional.programing;
 
 
 public class MaxSubArraySum {
@@ -6,7 +6,7 @@ public class MaxSubArraySum {
     /**
      * BigO= n
      */
-    public static int sum(int array[]){
+    public static int sum(int[] array){
         int[]results = new int[array.length];
         int previews = 0, res =0, index=1 ;
         if(array.length==1)
@@ -38,11 +38,11 @@ public class MaxSubArraySum {
     }
 
     public static void main (String[] args) {
-        int array[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int[] array = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
         System.out.println(sum(array)); //6
-        int array2[]={5,-3,5};
+        int[] array2 ={5,-3,5};
         System.out.println(sum(array2)); //7
-        int array3[]={1};
+        int[] array3 ={1};
         System.out.println(sum(array3)); //1
     }
 }

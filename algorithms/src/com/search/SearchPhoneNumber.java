@@ -20,7 +20,7 @@ public class SearchPhoneNumber {
     public static void readPhoneNumbers(List<Person>list){
         list.stream().forEach(p-> System.out.println("Name:"+p.getName()+"  phone:"+p.getPhone()));
     }
-    public static void main(String args[]){
+    public static void main(String[] args){
         Person p1 = new Person("Liz","5585304512");
         Person p2 = new Person("Ezra","87986253");
         Person p3 = new Person("Anita","777872553");

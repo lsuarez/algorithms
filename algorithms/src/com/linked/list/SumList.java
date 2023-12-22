@@ -3,7 +3,7 @@ package com.linked.list;
 public class SumList {
     static LinkedList result = new LinkedList();
     static int carry =0;
-    public static void main(String args[]){
+    public static void main(String[] args){
         LinkedList l1 = new LinkedList();
         l1.append(5);
         l1.append(1);

@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Graph {
-    private int V;                              //number of nodes in the graph
-    private LinkedList<Integer> adj[];              //adjacency list
-    private Queue<Integer> queue;                   //maintaining a queue
+    private final int V;                              //number of nodes in the graph
+    private final LinkedList<Integer>[] adj;              //adjacency list
+    private final Queue<Integer> queue;                   //maintaining a queue
 
     Graph(int v) {
         V = v;
@@ -24,7 +24,7 @@ public class Graph {
 
     void BFS(int n) {
 
-        boolean nodes[] = new boolean[V];       //initialize boolean array for holding the data
+        boolean[] nodes = new boolean[V];       //initialize boolean array for holding the data
         int a = 0;
 
         nodes[n] = true;
@@ -46,7 +46,7 @@ public class Graph {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Graph graph = new Graph(6);
 
         graph.addEdge(0, 1);

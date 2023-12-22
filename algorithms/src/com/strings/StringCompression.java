@@ -17,7 +17,7 @@ public class StringCompression {
         return sb.toString();
     }
     private static int getCompressLen(String word){
-        char characters[] = word.toCharArray();
+        char[] characters = word.toCharArray();
         int counter = 0;
         for(int i=0; i<word.length(); i++ ){
 
@@ -29,7 +29,7 @@ public class StringCompression {
     }
 
 
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         System.out.println(compress("jjjttowwwwwyyyyyyyy"));
 

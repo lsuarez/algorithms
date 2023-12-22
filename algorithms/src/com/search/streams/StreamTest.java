@@ -25,7 +25,7 @@ public class StreamTest {
         String name = "Joe";
         return (o instanceof String is) && is.equalsIgnoreCase(name);
     }
-    public static void main(String args[]){
+    public static void main(String[] args){
         System.out.println(usingInstanceOfAsATypePattern("Liz"));
         System.out.println(usingInstanceOfAsATypePattern("JOE"));
     }

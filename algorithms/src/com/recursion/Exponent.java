@@ -24,8 +24,11 @@ public class Exponent {
             return result * base;
 
     }
-    public static void main(String args[]){
-        System.out.println("Calculate pow of 2 to 14 ="+pow(1, 1000_000_000)); //Calculate pow of 2 to 14 =16384
+    public static void main(String[] args){
+        long inicio = System.currentTimeMillis();
+        System.out.println("Calculate pow of 2 to 14 ="+pow(2, 900_000_000)); //Calculate pow of 2 to 14 =16384
+        long fin = System.currentTimeMillis();
+        System.out.println("Tiempo transcurrido:"+(fin-inicio));
         System.out.println("Calculate pow of 3 to 5 ="+pow(3, 5)); //Calculate pow of 3 to 5 =243
         System.out.println("Calculate pow of 2 to 10 ="+pow(2, 10)); //Calculate pow of 2 to 10 =1024
         System.out.println("Calculate pow of 4 to 1 ="+pow(4, 1)); //Calculate pow of 4 to 1 =4

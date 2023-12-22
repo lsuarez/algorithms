@@ -3,8 +3,8 @@ package com.queue;
 import com.stacks.MyStack;
 
 public class MyQueue {
-    private MyStack initialStack= new MyStack();
-    private MyStack orderedStack= new MyStack();
+    private final MyStack initialStack= new MyStack();
+    private final MyStack orderedStack= new MyStack();
 
     public void add( int value){
         initialStack.push(value);

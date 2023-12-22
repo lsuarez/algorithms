@@ -1,7 +1,7 @@
 package com.stacks;
 
 public class StackMin {
-    public static void main(String args[]){
+    public static void main(String[] args){
         MyStack<Integer> stack = new MyStack<>();
         stack.push(34);
         stack.push(12);

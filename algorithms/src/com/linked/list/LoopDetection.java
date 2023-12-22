@@ -8,7 +8,7 @@ package com.linked.list;
  *
  */
 public class LoopDetection {
-    public static void main(String args[]){
+    public static void main(String[] args){
         LinkedListTail list = new LinkedListTail();
         // 1->2->3->4->2
         Node node2 = new Node(2);

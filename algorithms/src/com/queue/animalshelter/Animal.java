@@ -1,10 +1,10 @@
 package com.queue.animalshelter;
 
-public class Animal {
+public  class Animal {
     private String name;
     private ExtraInformation extraInformation= new ExtraInformation();
     public void speak(){
-
+        System.out.println("Speaks");
     }
 
     public String getName() {

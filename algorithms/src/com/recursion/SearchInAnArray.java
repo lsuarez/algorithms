@@ -1,6 +1,5 @@
 package com.recursion;
 
-import java.util.Arrays;
 
 /**
  * Dado un log de compilaciones quiero que encuentres la ultima posicion donde compilaba el codigo
@@ -26,7 +25,8 @@ public class SearchInAnArray {
      *  BiogO Log(n)
      */
 
-    public static int searchPosition(boolean array[], int low, int high){
+    public static int searchPosition(boolean[] array, int low, int high){
+
         if(array==null || array.length==0)
             return -1;
         if(low == high )
@@ -44,17 +44,24 @@ public class SearchInAnArray {
         else
             return searchPosition(array, mid+1, n);
     }
-    public static void main (String args[]){
+    public static void main (String[] args){
         // [true, true, true, false]
         //retornar 2
         boolean[] log1 ={true, true, true, false};
+        long inicio = System.currentTimeMillis();
         System.out.println(searchPosition(log1, 0, log1.length));
+        long fin = System.currentTimeMillis();
+        long tiempoTranscurrido = fin - inicio;
+        System.out.println("Tiempo de ejecución:"+ tiempoTranscurrido);
 
         //[true, true, true, true, true, true,true, true, true,true, true, true, false, false]
         //retornar 11
         boolean[] log2 ={true, true, true, true, true, true,true, true, true,true, true, true, false, false};
+        inicio = System.currentTimeMillis();
         System.out.println(searchPosition(log2, 0, log2.length));
-
+        fin = System.currentTimeMillis();
+        tiempoTranscurrido = fin - inicio;
+        System.out.println("Tiempo de ejecución:"+ tiempoTranscurrido);
         // [false, false, false, false]
         // -1
         boolean[] log3 ={false, false, false, false};

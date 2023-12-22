@@ -46,7 +46,7 @@ public class Palindrome {
         }
         return head;
     }
-    public static void main(String args[]){
+    public static void main(String[] args){
         LinkedList l1 = new LinkedList();
         l1.append(1);
         l1.append(0);

@@ -47,12 +47,9 @@ public class ValidateAnagram {
             else
                 return false;
         }
-        if(!stored.isEmpty())
-            return false;
-
-        return true;
+        return stored.isEmpty();
     }
-    public static void main(String args[]){
+    public static void main(String[] args){
         //“Listen” and “Silent”
         System.out.println(isAnagram("Listen","Silent"));
         System.out.println(isAnagram("Ronald Wilson Reagan","Insane anglo warlord"));
