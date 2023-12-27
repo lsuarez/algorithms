@@ -21,13 +21,6 @@ public class CommonPrefix {
                 char letterToCompare=' ';
                 if(strs[wordNumber].length()-1>=indexOfCharacter )
                     letterToCompare = strs[wordNumber].charAt(indexOfCharacter);
-                if(( wordNumber>=strs[wordNumber].length() )&& arrayLen==wordNumber) {
-
-                    if(l == letterToCompare )
-                        return sb.toString();
-                    else
-                        return "";
-                }
                 if( l == letterToCompare )
                     wordNumber++;
                 else {
