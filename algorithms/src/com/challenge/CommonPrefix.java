@@ -13,23 +13,31 @@ public class CommonPrefix {
             return "";
         StringBuilder sb= new StringBuilder();
         int arrayLen = strs.length;
-        int index=1;
+        int indexOfCharacter=0;
         for(char l:strs[0].toCharArray()){
-            int i=1;
+            int wordNumber=1;
             sb.append(l);
-            while (arrayLen>i){
-                if((strs[i].length()<=index  || i>=strs[i].length() )&& arrayLen==i) {
-                    if(sb.toString().equals(strs[i].substring(0,index)))
+            while (arrayLen>wordNumber){
+                char letterToCompare=' ';
+                if(strs[wordNumber].length()-1>=indexOfCharacter )
+                    letterToCompare = strs[wordNumber].charAt(indexOfCharacter);
+                if(( wordNumber>=strs[wordNumber].length() )&& arrayLen==wordNumber) {
+
+                    if(l == letterToCompare )
                         return sb.toString();
                     else
                         return "";
                 }
-                if( strs[i].length()>=index && sb.toString().equals(strs[i].substring(0,index)))
-                    i++;
-                else
-                    return sb.toString().substring(0,index-1);
+                if( l == letterToCompare )
+                    wordNumber++;
+                else {
+
+                    if(sb.toString().length()<1)
+                        return "";
+                    return sb.toString().substring(0, indexOfCharacter);
+                }
             }
-            index++;
+            indexOfCharacter++;
         }
         return sb.toString();
     }
@@ -48,9 +56,9 @@ public class CommonPrefix {
         System.out.println(longestCommonPrefix(str));
         System.out.println(longestCommonPrefix(str2));
         System.out.println(longestCommonPrefix(str3));
-
-
         System.out.println(longestCommonPrefix(str4));
+
+
 
 
     }
