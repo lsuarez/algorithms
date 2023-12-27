@@ -19,14 +19,17 @@ public class CommonPrefix {
             sb.append(l);
             while (arrayLen>wordNumber){
                 char letterToCompare=' ';
-                if(strs[wordNumber].length()-1>=indexOfCharacter )
+                if(strs[wordNumber].length()-1>=indexOfCharacter ) {
                     letterToCompare = strs[wordNumber].charAt(indexOfCharacter);
-                if( l == letterToCompare )
+                }
+                if( l == letterToCompare ) {
                     wordNumber++;
+                }
                 else {
 
-                    if(sb.toString().length()<1)
+                    if(sb.toString().length()<1) {
                         return "";
+                    }
                     return sb.toString().substring(0, indexOfCharacter);
                 }
             }
