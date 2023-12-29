@@ -11,24 +11,17 @@ public class BiggerThanK {
             return new int[0];
         PriorityQueue<Integer> orderedDesc= new PriorityQueue<>(k);
         for(int i=0; i<len;i++){
-            if(orderedDesc.size()==k){
-                int temp = orderedDesc.poll();
-                if(array[i]>temp){
-                    orderedDesc.add(array[i]);
-                }else{
-                    orderedDesc.add(temp);
-                }
-            }else{
-                orderedDesc.add(array[i]);
-            }
+            orderedDesc.add(array[i]);
+            if(orderedDesc.size()>k)
+                orderedDesc.poll();
 
         }
         int[] biggerNumbers= new int[k];
         Iterator<Integer>iterator = orderedDesc.iterator();
-        for(int i=0; i<k;i++){
-            if(iterator.hasNext()){
+        int i=0;
+        while(iterator.hasNext()){
                 biggerNumbers[i] =iterator.next();
-            }
+                i++;
         }
         return biggerNumbers;
     }
