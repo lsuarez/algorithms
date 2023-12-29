@@ -9,10 +9,10 @@ public class BiggerThanK {
             return null;
         if(k==0)
             return new int[0];
-        TreeSet<Integer> orderedDesc= new TreeSet<>(Comparator.reverseOrder());
+        PriorityQueue<Integer> orderedDesc= new PriorityQueue<>(k);
         for(int i=0; i<len;i++){
             if(orderedDesc.size()==k){
-                int temp = orderedDesc.pollLast();
+                int temp = orderedDesc.poll();
                 if(array[i]>temp){
                     orderedDesc.add(array[i]);
                 }else{
