@@ -4,12 +4,25 @@ import java.util.*;
 
 public class BiggerThanK {
     public static int[] searchBiggerNumbers(Integer array[], int k){
-        if(k> array.length)
+        int len = array.length;
+        if(k> len)
             return null;
         if(k==0)
             return new int[0];
-        Set<Integer> orderedDesc= new TreeSet<>(Comparator.reverseOrder());
-        orderedDesc.addAll(Arrays.asList(array));
+        TreeSet<Integer> orderedDesc= new TreeSet<>(Comparator.reverseOrder());
+        for(int i=0; i<len;i++){
+            if(orderedDesc.size()==k){
+                int temp = orderedDesc.pollLast();
+                if(array[i]>temp){
+                    orderedDesc.add(array[i]);
+                }else{
+                    orderedDesc.add(temp);
+                }
+            }else{
+                orderedDesc.add(array[i]);
+            }
+
+        }
         int[] biggerNumbers= new int[k];
         Iterator<Integer>iterator = orderedDesc.iterator();
         for(int i=0; i<k;i++){
@@ -22,7 +35,7 @@ public class BiggerThanK {
 
     public static void main(String args[]){
         Integer [] array={2,43,1,54,90,56,33,88,14,16,13,85};
-        System.out.println(searchBiggerNumbers(array, 7));  //-> 90, 88, 85, 56, 54,43,33
+        System.out.println(searchBiggerNumbers(array, 4));  //-> 90, 88, 85, 56, 54,43,33
         System.out.println(searchBiggerNumbers(array, 0));
     }
 }
