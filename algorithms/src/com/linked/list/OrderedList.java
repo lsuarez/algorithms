@@ -2,62 +2,47 @@ package com.linked.list;
 
 public class OrderedList {
 
-    private static Node removingANode(Node node, int toRemove){
-        Node current = node;
-        Node prev = node;
-        Node temp=null;
-        while(current!=null){
-            if(current.data == toRemove){
-                temp = current.next;
-                if(prev == current){
-                    return temp;
-                }else {
-                    prev.next = temp;
-                }
-
-                return node;
-            }
-            prev= current;
-            current = current.next;
-        }
-        return node;
-    }
-    private static Node gatherBiggerOne(Node node){
-        int data=Integer.MIN_VALUE;
-        Node current = node;
-        Node bigger = null;
-        while(current !=null){
-            if(current.data>data ){
-                data = current.data;
-                bigger = current;
-            }
-            current = current.next;
-        }
-        return bigger;
-    }
-
     public static Node orderingList(Node node){
-        Node current = node;
-        Node prev = null;
-        Node tmp = null;
-        while(current!=null){
-            tmp = prev;
-            prev = gatherBiggerOne(node);
-            node = removingANode(node, prev.data);
-            current=current.next;
-            if(tmp != null){
-                prev.next = tmp;
+
+        Node ordered = null;
+        Node current=node;
+        while(current !=null){
+            Node bigger = null;
+            Node temp=null;
+            Node prev = node;
+            int data=Integer.MIN_VALUE;
+            while (current != null) {
+                if (current.data > data) {
+                    data = current.data;
+                    bigger = current;
+                    temp = prev;
+                }
+                prev = current;
+                current = current.next;
+            }
+            if(temp!=bigger) {
+                prev = temp;
+                prev.next = bigger.next;
             }else{
-                prev.next= null;
+                prev=bigger.next;
+                node = prev;
             }
-            if(current == null){
-                tmp = prev;
-                prev= node;
-                prev.next = tmp;
+
+            temp = ordered;
+            if(temp==null){
+                temp = bigger;
+                temp.next= null;
+            }else {
+                prev = temp;
+                temp = bigger;
+                temp.next = prev;
             }
+            ordered = temp;
+            current=node;
         }
-        return prev;
+        return ordered;
     }
+
 
     public static void printList(Node node){
         Node current = node;
