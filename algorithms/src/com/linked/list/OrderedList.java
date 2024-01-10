@@ -53,6 +53,7 @@ public class OrderedList {
                 temp = current.next;
                 prev.next =temp;
                 current =prev;
+                return node;
             }
             prev= current;
             current = current.next;
