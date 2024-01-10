@@ -44,6 +44,22 @@ public class OrderedList {
         return node;
     }
 
+    public static Node removingANode(Node node, int toRemove){
+        Node current = node;
+        Node prev = null;
+        Node temp=null;
+        while(current!=null){
+            if(current.data == toRemove){
+                temp = current.next;
+                prev.next =temp;
+                current =prev;
+            }
+            prev= current;
+            current = current.next;
+        }
+        return node;
+    }
+
     public static void main(String args[]){
         Node node = new Node(10);
         Node node2= new Node(8);
@@ -52,8 +68,9 @@ public class OrderedList {
         node3.next=node4;
         node2.next=node3;
         node.next= node2;
-        Node ordered = orderList(node);
-        System.out.println(ordered);
+        Node newNode = removingANode(node, 11);
+      //  Node ordered = orderList(node);
+        System.out.println(newNode);
 
     }
 }
