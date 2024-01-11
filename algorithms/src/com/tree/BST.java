@@ -3,7 +3,7 @@ package com.tree;
 /**
  * A binary tree is a recursive data structure where each node can have 2 children at most.
  */
-public class BinaryTree {
+public class BST {
     Node root;
     private Node addRecursive(Node current, int value) {
         if (current == null) {
@@ -34,7 +34,7 @@ public class BinaryTree {
     public static void main(String[] args){
         int[] array ={1,2,3,4};
         System.out.println(sum(array, 0, array.length-1));
-        BinaryTree bt = new BinaryTree();
+        BST bt = new BST();
         bt.add(6);
         bt.add(4);
         bt.add(8);
@@ -42,9 +42,6 @@ public class BinaryTree {
         bt.add(5);
         bt.add(1);
         bt.add(9);
-
-
-
     }
 }
 

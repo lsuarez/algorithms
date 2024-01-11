@@ -2,7 +2,6 @@ package com.tree;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
 
 public class FindMinimumCommonNode {
 
@@ -38,34 +37,34 @@ public class FindMinimumCommonNode {
 
     }
 
-    public static int findMinimumCommonNode(BinaryTree bt, int value1, int value2){
+    public static int findMinimumCommonNode(BST bt, int value1, int value2){
         int searchingValue=0;
         if(value1 == bt.root.value || value2 == bt.root.value){
             return bt.root.value;
         }
-        Node parentNodeIzq = null;
-        Node parentNodeLeft=null;
+        Node parentNode1 = null;
+        Node parentNode2=null;
 
 
-        parentNodeIzq = findParentNode(bt.root, value1);
-        if(visited.contains(parentNodeIzq.value)){
+        parentNode1 = findParentNode(bt.root, value1);
+        if(visited.contains(parentNode1.value)){
             return visited.pollLast();
         }
-        visited.add(parentNodeIzq.value);
-        parentNodeLeft = findParentNode(bt.root, value2);
-        if(visited.contains(parentNodeLeft.value)){
+        visited.add(parentNode1.value);
+        parentNode2 = findParentNode(bt.root, value2);
+        if(visited.contains(parentNode2.value)){
             return visited.pollLast();
         }
-        visited.add(parentNodeLeft.value);
+        visited.add(parentNode2.value);
 
-        if(parentNodeIzq == parentNodeLeft){
-            return parentNodeIzq.value;
+        if(parentNode1 == parentNode2){
+            return parentNode2.value;
         }
-        return findMinimumCommonNode(bt, parentNodeLeft.value, parentNodeIzq.value);
+        return findMinimumCommonNode(bt, parentNode1.value, parentNode2.value);
     }
 
     public static void main(String[] args){
-        BinaryTree bt = new BinaryTree();
+        BST bt = new BST();
         bt.add(6);
         bt.add(4);
         bt.add(8);
@@ -78,5 +77,6 @@ public class FindMinimumCommonNode {
         System.out.println(findMinimumCommonNode(bt, 5, 1)); //4
         System.out.println(findMinimumCommonNode(bt, 9, 3)); //6
         System.out.println(findMinimumCommonNode(bt, 3, 5)); //4
+        System.out.println(findMinimumCommonNode(bt, 12, 12)); //4
     }
 }
