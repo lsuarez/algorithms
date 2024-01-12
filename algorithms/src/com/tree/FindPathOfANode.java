@@ -8,43 +8,31 @@ public class FindPathOfANode {
     private static ArrayList<Integer> path;
     public static void searching(BinaryNode tn, int value1){
         path = new ArrayList();
-        path.add(findPathOfNode(tn, value1).getData());
+        findPathOfNode(tn, value1);
         System.out.println(path.toString());
     }
-    public static BinaryNode findPathOfNode(BinaryNode parent,  int value1){
+
+
+    public static boolean findPathOfNode(BinaryNode parent,  int value1){
         if(parent ==null ){
-            return null;
+            return false;
         }
         if(parent.getData() == value1 ){
-            return parent;
+            path.add(parent.getData());
+            return true;
+        }
+        boolean isPath = findPathOfNode(parent.getLeft(), value1);
+        if(isPath){
+            path.add(parent.getData());
+            return true;
+        }
+        isPath = findPathOfNode(parent.getRight(), value1);
+        if(isPath){
+            path.add(parent.getData());
+            return true;
         }
 
-        if(parent.getLeft()!=null) {
-            if(parent.getLeft().getData() == value1  ){
-                path.add(parent.getLeft().getData());
-                return parent;
-                }
-                BinaryNode founded=null;
-                founded = findPathOfNode(parent.getLeft(), value1);
-                if(founded != null) {
-                    path.add(founded.getData());
-                    return parent;
-                }
-        }
-        if(parent.getRight()!=null) {
-            if (parent.getRight().getData() == value1) {
-                path.add(parent.getRight().getData());
-                return parent;
-            }
-            BinaryNode founded = null;
-            founded = findPathOfNode(parent.getRight(), value1);
-            if (founded != null) {
-                path.add(founded.getData());
-                return parent;
-            }
-        }
-
-        return null;
+        return false;
     }
 
     public static void main(String[] args){
@@ -57,8 +45,8 @@ public class FindPathOfANode {
         searching(tn, 12); //12- 8 -6
         searching(tn, 5); //5-4-6
 
+  /*
 
-/*
         6
     4   |  8
  3 | 5  |  12  | 9
