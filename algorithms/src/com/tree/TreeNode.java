@@ -1,5 +1,6 @@
 package com.tree;
 
+
 public class TreeNode {
     TreeNode[] children;
     int data;
@@ -30,5 +31,13 @@ public class TreeNode {
     }
 
     public TreeNode() {
+    }
+
+    @Override
+    public String toString() {
+        return
+               // "children=" + Arrays.toString(children) +
+                "  " + data +" ";
+               // '}';
     }
 }

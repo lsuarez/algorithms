@@ -103,7 +103,7 @@ public class OrderedList {
         node.next= node2;
        // printList(orderingList(node));
        // printList(orderingList(node));
-        ListNode n = new ListNode(10, new ListNode(8, new ListNode(11, new ListNode(7))));
+        ListNode n = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
         OrderedList obj = new OrderedList();
         ListNode[] array = new ListNode[1];
         array[0]=n;
