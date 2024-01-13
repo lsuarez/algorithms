@@ -3,8 +3,8 @@ package com.tree;
 import java.util.*;
 
 public class FindLargestPath {
-    public static ArrayList<Integer> paths= new ArrayList<>();
-    public static ArrayList<String> array = new  ArrayList<>();
+    static ArrayList<Integer> paths= new ArrayList<>();
+    static String  largestOne="";
     static int root;
     public static boolean searchingLargestPath(BinaryNode bt){
 
@@ -20,8 +20,12 @@ public class FindLargestPath {
         if(bt.getRight()!=null) {
             searchingLargestPath(bt.getRight());
         }
-        array.add(paths.toString());
+
         if(bt.getRight()==null && bt.getLeft()==null){
+            if(largestOne.length()<paths.toString().length()){
+                Collections.reverse(paths);
+                largestOne=paths.toString();
+            }
             paths.remove(paths.size()-1);
         }
         return false;
@@ -29,12 +33,9 @@ public class FindLargestPath {
     public static void printLargestPath(BinaryNode tn){
         root = tn.getData();
         searchingLargestPath(tn);
-        String longestString = array
-                .stream()
-                .max(Comparator.comparingInt(String::length))
-                .get();
+
         System.out.println("\nLargest path is = "
-                + longestString);
+                + largestOne);
 
     }
     public static void main(String[] args) {
