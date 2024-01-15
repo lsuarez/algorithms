@@ -12,9 +12,11 @@ public class SumNodes {
     public static void main(String[] args) {
         BinaryNode tn =
                 new BinaryNode(new BinaryNode(new BinaryNode(3), new BinaryNode(5),4) , new BinaryNode(null, new BinaryNode(new BinaryNode(12), new BinaryNode(2),9),8), 6);
+        System.out.println(sum(tn)); //49
+        BinaryNode tn2 = new BinaryNode(new BinaryNode(new BinaryNode(3), new BinaryNode(5),4), null,1 );
 
-
-        System.out.println(sum(tn));//3-4 - 6
+        System.out.println(sum(tn2)); //13
+        System.out.println(sum(null)); //0
 
 
   /*
