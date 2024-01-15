@@ -4,72 +4,35 @@ import java.util.*;
 
 public class FindLargestPath {
 
-    static StringBuilder largestPath = new StringBuilder();
-    static String pathTemp = "";
-    static int counter = 1, root = 0, counterTemp = 0;
+    private static ArrayList<Integer> path;
+    static int counter = 0, root = 0,counterTemp = 0;
+    static String pathLargest = "";
 
-    public static boolean searchingLargestPath(BinaryNode bt) {
-        if (bt == null) {
-            return true;
-        }
-        if (bt.getLeft() == null && bt.getRight() == null) {
-            largestPath.append(bt.getData() + "->");
-        }
 
-        if (bt.getLeft() != null) {
-            searchingLargestPath(bt.getLeft());
-            largestPath.append(bt.getData() + "->");
-            counter++;
-            clean(bt.getData());
-        }
 
-        if (bt.getRight() != null) {
-            searchingLargestPath(bt.getRight());
-            largestPath.append(bt.getData() + "->");
-            counter++;
-            clean(bt.getData());
 
+    public static ArrayList<Integer> longestPath(BinaryNode bn){
+        if(bn ==null){
+            ArrayList<Integer> output = new ArrayList<>();
+            return output;
         }
-        return true;
+        ArrayList<Integer> right = longestPath(bn.getRight());
+        ArrayList<Integer> left = longestPath(bn.getLeft());
 
-    }
-    private static void clean(int current){
-        if (root == current) {
-            if (counter > counterTemp) {
-                counterTemp = counter;
-                pathTemp = largestPath.toString();
-            }
-            largestPath = new StringBuilder();
-            counter = 1;
+        if(right.size()<left.size()){
+            left.add(bn.getData());
+        }else{
+            right.add(bn.getData());
         }
-    }
-
-    public static void printLargestPath(BinaryNode bt) {
-        if(bt==null){
-            System.out.println("There are not nodes");
-        }
-        if(bt.getLeft() == null && bt.getRight() == null){
-            System.out.println("Largest path is:" +bt.getData());
-            return;
-        }
-        root = bt.getRight().getData();
-        if(bt.getLeft() != null) {
-            searchingLargestPath(bt.getLeft());
-        }
-        largestPath = new StringBuilder();
-        counter = 1;
-        if(bt.getRight() != null) {
-            searchingLargestPath(bt.getRight());
-        }
-        System.out.println("Largest path is:" + pathTemp + bt.getData());
+        return ( left.size()>right.size() ? left:right);
 
     }
 
     public static void main(String[] args) {
-     //   BinaryNode tn =
-        //        new BinaryNode(new BinaryNode(null, new BinaryNode(3), 9), new BinaryNode(new BinaryNode(8), new BinaryNode(null, new BinaryNode(1), 2), 7), 5);
-        BinaryNode tn = new BinaryNode(null, new BinaryNode(null, new BinaryNode(3),4),2);
-        printLargestPath(tn);
+        BinaryNode tn =
+                new BinaryNode(new BinaryNode(null, new BinaryNode(3), 9), new BinaryNode(new BinaryNode(8), new BinaryNode(null, new BinaryNode(1), 2), 7), 5);
+     //   BinaryNode tn = new BinaryNode( new BinaryNode( new BinaryNode(3),null,4),null,2);
+        System.out.println(longestPath(tn).toString());
 
   /*
 
