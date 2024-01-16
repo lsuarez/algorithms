@@ -40,6 +40,9 @@ public class BinaryNode {
         this.data = data;
     }
 
+    public BinaryNode() {
+    }
+
     @Override
     public String toString() {
         return "BinaryNode{" +
