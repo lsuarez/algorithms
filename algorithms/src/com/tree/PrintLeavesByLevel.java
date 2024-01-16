@@ -2,7 +2,9 @@ package com.tree;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PrintLeavesByLevel {
@@ -24,29 +26,36 @@ public class PrintLeavesByLevel {
 
     }
 
-    public static void printingWithoutRecursion(BinaryNode bn) {
-        if (bn == null) {
+    public static void printLevelOrder(BinaryNode root) {
+        if (root == null) {
             return;
         }
-        System.out.println(bn.getData());
-
-        int i = 0;
-        printChildren(bn);
-        for (BinaryNode n : nodes) {
-            i = i + 2;
-            double enter = Math.pow(2, i - 1);
-            if (i == enter) {
-                System.out.println();
+        Queue<BinaryNode> q = new LinkedList<>();
+        q.add(root);
+        while(true){
+            int nodeCount = q.size();
+            if(nodeCount == 0)
+                break;
+            while(nodeCount>0){
+                BinaryNode node = q.peek();
+                System.out.print(node.getData() + " ");
+                q.remove();
+                if(node.getLeft()!=null){
+                    q.add(node.getLeft());
+                }
+                if(node.getRight()!=null){
+                    q.add(node.getRight());
+                }
+                nodeCount--;
             }
-            printChildren(n);
+            System.out.println();
         }
-
     }
 
     public static void main(String[] args) {
         BinaryNode tn =
                 new BinaryNode(new BinaryNode(new BinaryNode(3), new BinaryNode(5), 4), new BinaryNode(new BinaryNode(12), new BinaryNode(null, null, 9), 8), 11);
-        printingWithoutRecursion(tn);
+        printLevelOrder(tn);
         /*
         11
     4   |  8
