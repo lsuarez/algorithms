@@ -1,56 +1,70 @@
 package com.tree;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FindMaxCombinations {
 
 
-    private static BinaryNode setNode(BinaryNode n1, BinaryNode n2, BinaryNode n3) {
-        BinaryNode n= n2;
-        n.setRight(n3);
-        n.setLeft(n1);
-        return n;
+    private static Queue<Integer> getValues(int N){
+        Queue<Integer> values = new LinkedList<>();
+        for(int i=0; i<N; i++){
+            values.add(i+1);
+        }
+        return values;
     }
 
-    public static List<BinaryNode> findMaxCombinations(BinaryNode n1, BinaryNode n2, BinaryNode n3) {
+    private static BinaryNode fill(BinaryNode node, int valToInsert){
+        if(valToInsert < node.getData()){
+            if(node.getLeft()!=null){
+                return fill(node.getLeft(), valToInsert);
+            }else{
+                node.setLeft(new BinaryNode(valToInsert));
+            }
+
+            return node;
+        }
+        if(valToInsert > node.getData()){
+            if(node.getRight()!=null){
+                return fill(node.getRight(), valToInsert);
+            }else {
+                node.setRight(new BinaryNode(valToInsert));
+            }
+            return node;
+        }
+        return null;
+    }
+
+    public static List<BinaryNode> findMaxCombinations(int N) {
 
         List<BinaryNode> nodes = new ArrayList<>();
+        Queue<Integer> values = getValues(N);
 
+        int i=0;
+        while(i<N){
+            Queue<Integer> heads = getValues(N);
 
-        BinaryNode node1 = setNode(n1, n2, n3);
-        if (node1 != null) {
-            nodes.add(node1);
+            BinaryNode root = new BinaryNode(values.poll());
+            BinaryNode current = root;
+            while (values.size() != 0) {
+
+                current = fill(current, values.poll());
+
+            }
+            nodes.add(root);
+            i++;
+            values = heads;
+            for(int j =0; j<i;j++){
+                values.poll();
+                values.add(j+1);
+            }
         }
-        BinaryNode node2 = n1;
-        BinaryNode node2_3 = setNode(null, n2, n3);
-        node2.setRight(node2_3);
-        if (node2 != null) {
-            nodes.add(node2);
-        }
-        BinaryNode node3 = n3;
-        node3.setLeft(setNode(n1, n2, null));
-        if (node3 != null) {
-            nodes.add(node3);
-        }
-        BinaryNode node4 = n1;
-        node4.setRight(setNode(n2, n3, null));
-        if (node4 != null) {
-            nodes.add(node4);
-        }
-        BinaryNode node5 = n3;
-        node5.setLeft(setNode(null, n1, n2));
-        if (node5 != null) {
-            nodes.add(node5);
-        }
-        return nodes;
+            return nodes;
     }
 
 
     public static void main(String[] args) {
-        findMaxCombinations(new BinaryNode(1), new BinaryNode(2), new BinaryNode(3));
+        List<BinaryNode> nodes =findMaxCombinations(3);
+        System.out.println(nodes.toString());
     }
     /*
         2
