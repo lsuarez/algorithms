@@ -1,34 +1,56 @@
 package com.tree;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class FindMaxCombinations {
 
 
-    private static BinaryNode setNode(BinaryNode n1, BinaryNode n2, BinaryNode n3){
-        BinaryNode node = new BinaryNode();
-        node = n2;
-        node.setLeft(n3);
-        node.setRight(n1);
-        return node;
+    private static BinaryNode setNode(BinaryNode n1, BinaryNode n2, BinaryNode n3) {
+        BinaryNode n= n2;
+        n.setRight(n3);
+        n.setLeft(n1);
+        return n;
     }
 
-    public static BinaryNode[] findMaxCombinations(int N){
-        BinaryNode[] combinations = new BinaryNode[N];
-        if(N<=1){
-            combinations[0]=new BinaryNode(N);
-            return combinations;
-        }
+    public static List<BinaryNode> findMaxCombinations(BinaryNode n1, BinaryNode n2, BinaryNode n3) {
+
+        List<BinaryNode> nodes = new ArrayList<>();
 
 
-        int i=0;
-        while(i< N){
-            BinaryNode node =setNode( , , );
+        BinaryNode node1 = setNode(n1, n2, n3);
+        if (node1 != null) {
+            nodes.add(node1);
         }
+        BinaryNode node2 = n1;
+        BinaryNode node2_3 = setNode(null, n2, n3);
+        node2.setRight(node2_3);
+        if (node2 != null) {
+            nodes.add(node2);
         }
-
-        return combinations;
+        BinaryNode node3 = n3;
+        node3.setLeft(setNode(n1, n2, null));
+        if (node3 != null) {
+            nodes.add(node3);
+        }
+        BinaryNode node4 = n1;
+        node4.setRight(setNode(n2, n3, null));
+        if (node4 != null) {
+            nodes.add(node4);
+        }
+        BinaryNode node5 = n3;
+        node5.setLeft(setNode(null, n1, n2));
+        if (node5 != null) {
+            nodes.add(node5);
+        }
+        return nodes;
     }
+
+
     public static void main(String[] args) {
-        findMaxCombinations(3);
+        findMaxCombinations(new BinaryNode(1), new BinaryNode(2), new BinaryNode(3));
     }
     /*
         2
