@@ -5,10 +5,10 @@ import java.util.*;
 public class FindMaxCombinations {
 
 
-    private static Queue<Integer> getValues(int N){
-        Queue<Integer> values = new LinkedList<>();
+    private static int[] getValues(int N){
+        int[] values = new int[N];
         for(int i=0; i<N; i++){
-            values.add(i+1);
+            values[i]=(i+1);
         }
         return values;
     }
@@ -34,36 +34,56 @@ public class FindMaxCombinations {
         return null;
     }
 
-    public static List<BinaryNode> findMaxCombinations(int N) {
+    public static Set<BinaryNode> findMaxCombinations(int N) {
 
-        List<BinaryNode> nodes = new ArrayList<>();
-        Queue<Integer> values = getValues(N);
+        Set<BinaryNode> nodes = new HashSet<>();
+        int[]values = getValues(N);
+        List<int[]> permutations = permute(values);
 
-        int i=0;
-        while(i<N){
-            Queue<Integer> heads = getValues(N);
-
-            BinaryNode root = new BinaryNode(values.poll());
+        for(int[]nums: permutations){
+            int i=0;
+            BinaryNode root = new BinaryNode(nums[i]);
+            i++;
             BinaryNode current = root;
-            while (values.size() != 0) {
-
-                current = fill(current, values.poll());
-
+            while (values.length-i > 0) {
+                current = fill(current, nums[i]);
+                i++;
             }
             nodes.add(root);
-            i++;
-            values = heads;
-            for(int j =0; j<i;j++){
-                values.poll();
-                values.add(j+1);
-            }
         }
             return nodes;
     }
+    // Function for swapping two numbers
+    static void swap(int nums[], int l, int i)
+    {
+        int temp = nums[l];
+        nums[l] = nums[i];
+        nums[i] = temp;
+    }
 
 
+    static void permutations(ArrayList<int[]> res,
+                             int[] nums, int l, int h) {
+        if (l == h) {
+            res.add(Arrays.copyOf(nums, nums.length));
+            return;
+        }
+
+        for (int i = l; i <= h; i++) {
+            swap(nums, l, i);
+            permutations(res, nums, l + 1, h);
+            swap(nums, l, i);
+        }
+    }
+    static ArrayList<int[]> permute(int[] nums)
+    {
+        ArrayList<int[]> res = new ArrayList<int[]>();
+        int x = nums.length - 1;
+        permutations(res, nums, 0, x);
+        return res;
+    }
     public static void main(String[] args) {
-        List<BinaryNode> nodes =findMaxCombinations(3);
+        Set<BinaryNode> nodes =findMaxCombinations(3);
         System.out.println(nodes.toString());
     }
     /*
