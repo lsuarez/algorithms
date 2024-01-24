@@ -1,5 +1,7 @@
 package com.linked.list;
 
+import java.util.Stack;
+
 public class ReverseList {
 
     static Node head = null;
@@ -42,6 +44,13 @@ public class ReverseList {
        // reverse(node);
         Node reverse = reverseInSameList(node);
         System.out.println(reverse);
+
+        Stack stack= new Stack();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        System.out.println(stack.get(1));
+        stack.push(4);
 
     }
 }
