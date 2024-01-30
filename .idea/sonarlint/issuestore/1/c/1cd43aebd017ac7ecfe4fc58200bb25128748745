@@ -1,14 +1,0 @@
-
-L	java:S106"+Replace this use of System.out by a logger.(Ì“¦¯şÿÿÿÿ8ëÖÀÕ1
-L	java:S106"+Replace this use of System.out by a logger.(Ì“¦¯şÿÿÿÿ8ìÖÀÕ1
-L	java:S106"+Replace this use of System.out by a logger.(Ì“¦¯şÿÿÿÿ8ìÖÀÕ1
-L	java:S106"+Replace this use of System.out by a logger.(Ì“¦¯şÿÿÿÿ8íÖÀÕ1
-]
-java:S1659"@Declare "col" and all following declarations on a separate line.(×¶±ì8íÖÀÕ1
-E
-java:S1481"(Remove this unused "col" local variable.(×¶±ì8íÖÀÕ1
-I
-java:S1197/",Move the array designators [][] to the type.(†¡‰8îÖÀÕ1
-I
-java:S1197G",Move the array designators [][] to the type.(ÇÆ«€8Œ·ßÀÕ1
-L	java:S106U"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8çÍãÀÕ1
