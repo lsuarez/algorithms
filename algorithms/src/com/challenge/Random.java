@@ -1,69 +1,46 @@
 package com.challenge;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Random {
-
-    private List<Integer> initialLoad;
-
-    private int loadFactor;
-    public Random(int N){
-        initialLoad = new ArrayList<>(N*2);
-        loading(N);
-        loadFactor=N;
-
-    }
-    private void loading(int N){
-        int i=0;
-        while(initialLoad.size()< N*2) {
-            initialLoad.add(i);
-            initialLoad.add(i);
-            i++;
-
-        }
-        Collections.shuffle(initialLoad);
-    }
-    public int getValue(){
-        int value = initialLoad.get(0);
-        initialLoad.remove(0);
-        checkLoadFactor();
+    public int getValue(int N){
+        long nano =System.nanoTime();
+        String valueStr= nano+"";
+        int max = valueStr.length();
+        String sub = valueStr.substring(max-2, max-1);
+        int value = Integer.valueOf(sub);
+        value = value % (N+1);
         return value;
     }
-    private void checkLoadFactor(){
-        if(initialLoad.size()<= loadFactor){
-            loading(loadFactor);
-        }
-    }
+
     public static void main(String[] args) {
-        Random obj= new Random(3);
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
-        System.out.println(obj.getValue());
+        Random obj= new Random();
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+        System.out.println(obj.getValue(3));
+
         /*
+3
+3
+2
+1
 0
+3
+0
+0
+2
 1
 2
-0
-1
-1
-1
-0
-0
-1
-2
-0
+3
          */
     }
 }
