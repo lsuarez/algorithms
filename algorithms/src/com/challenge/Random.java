@@ -8,9 +8,13 @@ public class Random {
         return 0;
     }
     public int getValue(int N){
-        long nano =System.nanoTime();
-        int value = Integer.valueOf((int) nano) % (N+1);
-       return Math.abs(value);
+        int index =0;
+        while(index<=N){
+            index ++;
+            if(flipCoin()==0)
+                return index;
+        }
+        return 0;
     }
 
 
@@ -19,7 +23,7 @@ public class Random {
 
         HashMap<Integer, Integer> map = new HashMap<>();
         for(int i=0; i<10_000; i++){
-             int value = obj.getValue(10);
+             int value = obj.getValue(100);
              if(map.containsKey(value)){
                  int total = map.get(value);
                  total++;
