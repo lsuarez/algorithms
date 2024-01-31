@@ -1,34 +1,35 @@
 package com.challenge;
 
 
+import java.util.HashMap;
 
 public class Random {
-    public int getValue(int N){
-        String nStr= N+"";
-        int lenOfN= nStr.length();
-        long nano =System.nanoTime();
-        String valueStr= nano+"";
-        int max = valueStr.length();
-        String sub = valueStr.substring(max-lenOfN, max);
-        int value = Integer.valueOf(sub);
-        value = value % (N+1);
-        return value;
+    public int flipCoin(){
+        return 0;
     }
+    public int getValue(int N){
+        long nano =System.nanoTime();
+        int value = Integer.valueOf((int) nano) % (N+1);
+       return Math.abs(value);
+    }
+
 
     public static void main(String[] args) {
         Random obj= new Random();
-        System.out.println(obj.getValue(1500));
-        System.out.println(obj.getValue(1500));
-        System.out.println(obj.getValue(1500));
-        System.out.println(obj.getValue(1500));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
-        System.out.println(obj.getValue(3));
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<10_000; i++){
+             int value = obj.getValue(10);
+             if(map.containsKey(value)){
+                 int total = map.get(value);
+                 total++;
+                 map.remove(value);
+                 map.put(value, total);
+             }else{
+                 map.put(value, 1);
+             }
+        }
+        System.out.println(map.toString());
 
         /*
 3
