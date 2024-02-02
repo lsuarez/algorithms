@@ -50,18 +50,16 @@ public class AdsKthPosition {
             if(processedData.size()>k)
                 processedData.poll();
         }
-        Iterator<Map.Entry<String, Integer>> it = processedData.iterator();
-        List<String> keys = new LinkedList<>();
-        while(it.hasNext()){
-            Map.Entry<String,Integer> mp = it.next();
-            keys.add(0,mp.getKey());
+        LinkedList<String> keys = new LinkedList<>();
+        while(!processedData.isEmpty()){
+            keys.addFirst(processedData.poll().getKey());
         }
         return keys;
     }
 
 
     /*
-    BigO->NlogN
+    BigO->N
      */
     public static void main(String[] args) {
         List<String> data= new ArrayList<>();
