@@ -32,69 +32,50 @@ public class AdsKthPosition {
 
     // Input format
     // List<String> - ["ads_1,1595268625", "..."]
-    static Map<String,Integer> procecedData;
+    static PriorityQueue<Map.Entry<String,Integer>> processedData;
+
 
     public static List<String> getCommonAds(int k, List<String> data){
-        processData(data);
-        Set set = procecedData.entrySet();
-        Iterator it = set.iterator();
+        processData(data,k);
+        Iterator it = processedData.iterator();
         List<String> keys = new ArrayList<>();
-        int index=0;
-        while(it.hasNext() && index<k){
+        while(it.hasNext()){
             Map.Entry mp = (Map.Entry)it.next();
             keys.add(mp.getKey().toString());
-            index++;
         }
 
         return keys;
     }
-    public static <K, V extends Comparable<V> > Map<K, V>
-    valueSort(final Map<K, V> map)
-    {
-        // Static Method with return type Map and
-        // extending comparator class which compares values
-        // associated with two keys
-        Comparator<K> valueComparator = new Comparator<K>() {
 
-            // return comparison results of values of
-            // two keys
-            public int compare(K k1, K k2)
-            {
-                int comp = map.get(k2).compareTo(
-                        map.get(k1));
-                if (comp == 0)
-                    return 1;
-                else
-                    return comp;
-            }
 
-        };
+    private static void processData(List<String> data, int k){
 
-        // SortedMap created using the comparator
-        Map<K, V> sorted = new TreeMap<K, V>(valueComparator);
-
-        sorted.putAll(map);
-
-        return sorted;
-    }
-
-    private static void processData(List<String> data){
-        procecedData= new TreeMap<>();
+        processedData = new PriorityQueue<>(k,Map.Entry.comparingByValue());
+        HashMap<String, Integer> map = new HashMap<>();
         for(String d:data){
             String key = d.split(",")[0];
             int total =0;
-            if(procecedData.containsKey(key)){
-                total= procecedData.get(key);
+            if(map.containsKey(key)){
+                total= map.get(key);
                 total++;
-                procecedData.remove(key);
-                procecedData.put(key, total);
+                map.remove(key);
+                map.put(key, total);
             }else{
-                procecedData.put(key, total);
+                map.put(key, 1);
             }
         }
-        procecedData = valueSort(procecedData);
-
+        Set set = map.entrySet();
+        Iterator it= set.iterator();
+        while(it.hasNext()){
+            Map.Entry mp = (Map.Entry)it.next();
+            processedData.add( mp);
+            if(processedData.size()>k)
+                processedData.poll();
+        }
     }
+    /*
+    BigO->NlogN
+     */
     public static void main(String[] args) {
         List<String> data= new ArrayList<>();
         data.add("ads_1,1595268625");
