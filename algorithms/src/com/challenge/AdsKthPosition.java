@@ -32,47 +32,34 @@ public class AdsKthPosition {
 
     // Input format
     // List<String> - ["ads_1,1595268625", "..."]
-    static PriorityQueue<Map.Entry<String,Integer>> processedData;
-
 
     public static List<String> getCommonAds(int k, List<String> data){
-        processData(data,k);
-        Iterator it = processedData.iterator();
-        List<String> keys = new ArrayList<>();
-        while(it.hasNext()){
-            Map.Entry mp = (Map.Entry)it.next();
-            keys.add(mp.getKey().toString());
-        }
 
-        return keys;
-    }
-
-
-    private static void processData(List<String> data, int k){
-
-        processedData = new PriorityQueue<>(k,Map.Entry.comparingByValue());
+        PriorityQueue<Map.Entry<String,Integer>> processedData = new PriorityQueue<>(k,Map.Entry.comparingByValue());
         HashMap<String, Integer> map = new HashMap<>();
         for(String d:data){
             String key = d.split(",")[0];
-            int total =0;
             if(map.containsKey(key)){
-                total= map.get(key);
-                total++;
-                map.remove(key);
-                map.put(key, total);
+                map.put(key, map.get(key)+1);
             }else{
                 map.put(key, 1);
             }
         }
-        Set set = map.entrySet();
-        Iterator it= set.iterator();
-        while(it.hasNext()){
-            Map.Entry mp = (Map.Entry)it.next();
+        for(Map.Entry<String,Integer> mp: map.entrySet()){
             processedData.add( mp);
             if(processedData.size()>k)
                 processedData.poll();
         }
+        Iterator<Map.Entry<String, Integer>> it = processedData.iterator();
+        List<String> keys = new LinkedList<>();
+        while(it.hasNext()){
+            Map.Entry<String,Integer> mp = it.next();
+            keys.add(0,mp.getKey());
+        }
+        return keys;
     }
+
+
     /*
     BigO->NlogN
      */
