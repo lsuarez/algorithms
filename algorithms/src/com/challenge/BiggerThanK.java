@@ -17,18 +17,21 @@ public class BiggerThanK {
 
         }
         int[] biggerNumbers= new int[k];
-        Iterator<Integer>iterator = orderedDesc.iterator();
-        int i=0;
-        while(iterator.hasNext()){
-                biggerNumbers[i] =iterator.next();
-                i++;
+        int i=k-1;
+        while(!orderedDesc.isEmpty()){
+                biggerNumbers[i] =orderedDesc.poll();
+                i--;
         }
+        for(int n:biggerNumbers){
+            System.out.print(n+" ");
+        }
+        System.out.println();
         return biggerNumbers;
     }
 
     public static void main(String args[]){
         Integer [] array={2,43,1,54,90,56,33,88,14,16,13,85};
-        System.out.println(searchBiggerNumbers(array, 4));  //-> 90, 88, 85, 56, 54,43,33
-        System.out.println(searchBiggerNumbers(array, 0));
+        searchBiggerNumbers(array, 4);  //-> 90, 88, 85, 56
+        searchBiggerNumbers(array, 6);//90, 88, 85, 56, 54,43
     }
 }
