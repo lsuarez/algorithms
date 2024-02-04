@@ -8,7 +8,6 @@ public class FraudulentActivity {
         int notifications = 0;
         Queue<Integer> queue = new LinkedList<>();
         int[] pastActivity = new int[201];
-
         for(int i = 0; i < d; i++)
         {
             int transaction = expenditure.get(i);
@@ -22,8 +21,6 @@ public class FraudulentActivity {
 
             if(newTransaction >= (2* median(pastActivity, d)))
                 notifications++;
-
-            //Remove the oldest transaction
             int oldestTransaction = queue.poll();
             pastActivity[oldestTransaction] = pastActivity[oldestTransaction]-1;
             queue.offer(newTransaction);
@@ -66,7 +63,9 @@ public class FraudulentActivity {
         }
     }
 
-
+/*
+BigO -> N
+ */
     public static void main(String[] args) {
         //2 3 4 2 3 6 8 4 5
         List<Integer>list = new ArrayList<>();
