@@ -1,31 +1,71 @@
 package com.arrays;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class FraudulentActivity {
 
     public static int activityNotifications(List<Integer> expenditure, int d) {
+        int notifications = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        int[] pastActivity = new int[201];
 
-        int[] array=expenditure.stream().mapToInt( (Integer i) -> i.intValue() ).toArray();
-        int subarray[] = new int[d];
-        System.arraycopy(array, 0, subarray, 0, d);
-        int index =0,   counter=0 , median=0;
-        Arrays.sort(subarray);
-
-        while(d+index<array.length-1){
-
-            median = subarray[(index+d)/2];
-            if(array[d+index]>=(2*median)){
-                counter++;
-            }
-            index++;
-            subarray=Arrays.copyOfRange(array, index, index+d);
-            Arrays.sort(subarray);
+        for(int i = 0; i < d; i++)
+        {
+            int transaction = expenditure.get(i);
+            queue.offer(transaction);
+            pastActivity[transaction] = pastActivity[transaction]+1;
         }
-        return counter;
+
+        for(int i = 0; i < expenditure.size()-d; i++)
+        {
+            int newTransaction = expenditure.get(i+d);
+
+            if(newTransaction >= (2* median(pastActivity, d)))
+                notifications++;
+
+            //Remove the oldest transaction
+            int oldestTransaction = queue.poll();
+            pastActivity[oldestTransaction] = pastActivity[oldestTransaction]-1;
+            queue.offer(newTransaction);
+            pastActivity[newTransaction] = pastActivity[newTransaction]+1;
+        }
+
+        return notifications;
     }
+
+    static double median(int[] array, int elements)
+    {
+        int index = 0;
+        int counter = (elements / 2);
+        if(elements % 2 == 0) {
+            while(counter > 0)
+            {
+                counter -= array[index];
+                index++;
+            }
+            index--;
+            if(counter <= -1) {
+                return index;
+            }
+            else{
+                int firstIndex = index;
+                int secondIndex = index+1;
+                while(array[secondIndex] == 0){
+                    secondIndex++;
+                }
+                return (double) (firstIndex + secondIndex) / 2.0;
+            }
+        }
+        else{
+            while(counter >= 0)
+            {
+                counter -= array[index];
+                index++;
+            }
+            return (double) index-1;
+        }
+    }
+
 
     public static void main(String[] args) {
         //2 3 4 2 3 6 8 4 5
@@ -39,7 +79,16 @@ public class FraudulentActivity {
         list.add(8);
         list.add(4);
         list.add(5);
-        System.out.println(activityNotifications(list,5));
+        System.out.println(activityNotifications(list,5)); //2
+
+        List<Integer>list2 = new ArrayList<>();
+        list2.add(1);
+        list2.add(2);
+        list2.add(3);
+        list2.add(4);
+        list2.add(4);
+
+        System.out.println(activityNotifications(list2,4)); //0
     }
 
 
