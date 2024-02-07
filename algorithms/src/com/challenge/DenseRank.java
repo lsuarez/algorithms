@@ -4,53 +4,55 @@ import java.util.*;
 
 public class DenseRank {
     public static List<Integer> climbingLeaderboard(List<Integer> ranked, List<Integer> player) {
-        TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
         List<Integer> result = new ArrayList<>();
-        int index =1;
-        for(Integer n: ranked){
-            if(!map.containsKey(n)){
-                map.put(n, index);
-                index++;
+        LinkedList<Integer> uniques = new LinkedList<>();
+        int previous =0;
+        for(int n: ranked){
+            if(previous==0){
+                previous=n;
+                uniques.add(n);
+            }else{
+                if(n!= previous){
+                    previous=n;
+                    uniques.add(n);
+                }
             }
         }
-        for(int i=0; i<player.size(); i++){
-            int p = player.get(i);
-            if(map.containsKey(p)){
-                result.add(map.get(p));
-            }else{
-                map.put(p, 0);
-                map =updateRank(map, p);
-                result.add(map.get(p));
+        for(int i=0;i< player.size();i++){
+            if(uniques.isEmpty()){
+                result.add(1);
+            }
+            else if(player.get(i)<uniques.getLast()){
+                result.add(uniques.size()+1);
+            }else {
+                while(!uniques.isEmpty() && player.get(i)>=uniques.getLast() ){
+                    uniques.removeLast();
+                }
+                result.add(uniques.size()+1);
             }
         }
         return result;
-}
-
-    private static TreeMap<Integer,Integer> updateRank(TreeMap<Integer, Integer> map, int n){
-
-        int index =1;
-        for(Map.Entry<Integer,Integer> me: map.entrySet()){
-            if(me.getKey() == n) {
-                map.put(me.getKey(), index);
-            }
-            index ++;
-        }
-        return map;
     }
-
+/*
+    BigO NM
+ */
     public static void main(String[] args) {
         //100 100 50 40 40 20 10
         //4
         //5 25 50 120
-        List<Integer> ranked = new ArrayList<>();
-        ranked.add(100);
+      //  List<Integer> ranked = Arrays.asList(100 ,90 ,90, 80 ,75 ,60);
+   /*     ranked.add(100);
         ranked.add(100);
         ranked.add(50);
         ranked.add(40);
         ranked.add(40);
         ranked.add(20);
         ranked.add(10);
-        List<Integer> player = Arrays.asList(5,25,50,120);
+
+    */ //(5,25,50,120
+      //  List<Integer> player = Arrays.asList(50, 65 ,77 ,90 ,102);//
+        List<Integer> ranked = Arrays.asList(1);
+        List<Integer> player = Arrays.asList(1,1);
         climbingLeaderboard(ranked,player);
 
     }

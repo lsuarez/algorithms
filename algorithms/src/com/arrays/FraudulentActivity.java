@@ -64,7 +64,7 @@ public class FraudulentActivity {
     }
 
 /*
-BigO -> N
+BigO -> NK
  */
     public static void main(String[] args) {
         //2 3 4 2 3 6 8 4 5
