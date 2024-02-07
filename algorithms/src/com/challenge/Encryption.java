@@ -23,7 +23,9 @@ public class Encryption {
             i++;
         }
         return sb.toString();
-    }
+    }/*
+    BigO n
+    */
     public static void main(String[] args) {
         System.out.println(encryption("iuo"));//io u
         System.out.println(encryption("a"));//a
