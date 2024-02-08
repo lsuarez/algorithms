@@ -20,10 +20,7 @@ public class CountingWords {
         Arrays.stream(phrase.trim().split(" ")).forEach(word->{
             word = word.replaceAll("[^a-zA-Z]", "");
             if(counter.containsKey(word)){
-                int total = counter.get(word);
-                counter.remove(word);
-                total ++;
-                counter.put(word, total);
+                counter.put(word, counter.get(word)+1);
             }else{
                 counter.put(word, 1);
             }

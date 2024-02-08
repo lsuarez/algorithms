@@ -7,15 +7,14 @@ public class DenseRank {
         List<Integer> result = new ArrayList<>();
         LinkedList<Integer> uniques = new LinkedList<>();
         int previous =0;
-        for(int n: ranked){
-            if(previous==0){
-                previous=n;
-                uniques.add(n);
-            }else{
-                if(n!= previous){
-                    previous=n;
-                    uniques.add(n);
-                }
+        for(int i=0;i<ranked.size();i++){
+            if(i==0){
+                previous= ranked.get(i);
+                uniques.add(previous);
+            }
+            if(ranked.get(i)!= previous){
+                    previous=ranked.get(i);
+                    uniques.add(ranked.get(i));
             }
         }
         for(int i=0;i< player.size();i++){
@@ -54,6 +53,7 @@ public class DenseRank {
         List<Integer> ranked = Arrays.asList(1);
         List<Integer> player = Arrays.asList(1,1);
         climbingLeaderboard(ranked,player);
+        System.out.println(Math.sqrt(12));
 
     }
 }
