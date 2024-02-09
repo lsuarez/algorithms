@@ -1,27 +1,29 @@
 package com.tree;
-
+/*
+T1 and T2 are the two very large binary trees, with T1 much bigger than T2. Create an algorithm
+to determine if T2 is a subtree of T1.
+A tree T2 is a subtree of T1 if there exist a node n in T1 such that the subtree of n is identical to T2. That is, if you cut off
+the tree at node n, the two trees would be identical.
+ */
 
 public class CheckSubtree {
 
     public static boolean isSubTree(BinaryNode t1, BinaryNode t2){
-        boolean isSubNode=false;
+        boolean isSubNodeR=false;
+        boolean isSubNodeL=false;
 
         if(t1.getData() == t2.getData()){
-            if(t2.getRight()!=null) {
-                isSubNode = isSame(t1.getRight(), t2.getRight());
-            }
-            if(t2.getLeft()!=null) {
-                isSubNode = isSame(t1.getLeft(), t2.getLeft());
-            }
-            return isSubNode;
+            isSubNodeR = isSame(t1.getRight(), t2.getRight());
+            isSubNodeL = isSame(t1.getLeft(), t2.getLeft());
+            return isSubNodeR && isSubNodeL;
         }
         if(t1.getLeft()!=null) {
-            isSubNode = isSubTree(t1.getLeft(), t2);
+            isSubNodeL = isSubTree(t1.getLeft(), t2);
         }
-        if(!isSubNode && t1.getRight()!=null) {
-            isSubNode = isSubTree(t1.getRight(), t2);
+        if(!isSubNodeL && t1.getRight()!=null) {
+            isSubNodeR = isSubTree(t1.getRight(), t2);
         }
-        return isSubNode;
+        return isSubNodeR || isSubNodeL;
     }
 
     private static boolean isSame(BinaryNode t1, BinaryNode t2){
