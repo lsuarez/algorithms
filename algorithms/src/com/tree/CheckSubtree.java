@@ -9,22 +9,22 @@ the tree at node n, the two trees would be identical.
 public class CheckSubtree {
 
     public static boolean isSubTree(BinaryNode t1, BinaryNode t2){
-        boolean isSubNodeR=false;
-        boolean isSubNodeL=false;
-
+        boolean isSameTree=false;
         if(t1.getData() == t2.getData()){
-            isSubNodeR = isSame(t1.getRight(), t2.getRight());
-            isSubNodeL = isSame(t1.getLeft(), t2.getLeft());
-            return isSubNodeR && isSubNodeL;
+            isSameTree = isSame(t1,t2);
         }
-        if(t1.getLeft()!=null) {
-            isSubNodeL = isSubTree(t1.getLeft(), t2);
+        if(!isSameTree) {
+            if(t1.getLeft()!=null) {
+                isSameTree = isSubTree(t1.getLeft(), t2);
+            }
+            if(!isSameTree && t1.getRight()!=null) {
+                isSameTree = isSubTree(t1.getRight(), t2);
+            }
         }
-        if(!isSubNodeL && t1.getRight()!=null) {
-            isSubNodeR = isSubTree(t1.getRight(), t2);
-        }
-        return isSubNodeR || isSubNodeL;
+        return isSameTree;
+
     }
+
 
     private static boolean isSame(BinaryNode t1, BinaryNode t2){
         if(t1==null && t2== null){
@@ -33,7 +33,7 @@ public class CheckSubtree {
         if(t1.getData()!= t2.getData()){
             return false;
         }
-        return !isSame(t1.getLeft(), t2.getLeft()) ? false : isSame(t1.getRight(), t2.getRight());
+        return isSame(t1.getLeft(), t2.getLeft()) ? isSame(t1.getRight(), t2.getRight()) : false ;
     }
 
 /*
@@ -56,6 +56,11 @@ public class CheckSubtree {
         BinaryNode t2_3 = new BinaryNode(null,new BinaryNode(1),2);
 
         System.out.println(isSubTree(t1_2,t2_3)); //true
+
+        BinaryNode t1_4 =
+                new BinaryNode(new BinaryNode(null, new BinaryNode(3), 2), new BinaryNode(new BinaryNode(8), new BinaryNode(null, new BinaryNode(1), 2), 7), 5);
+        BinaryNode t2_4 = new BinaryNode(null,new BinaryNode(1),2);
+        System.out.println(isSubTree(t1_4,t2_4));
     }
   /*    t1
         5
