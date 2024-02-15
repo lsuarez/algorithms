@@ -33,7 +33,10 @@ public class Calculate {
 
             }else if(c=='+'){
                 if(isNextMul){
-                    int temp =mul.pop()*convert(value);
+                    int temp=convert(value);
+                    while(!mul.isEmpty()){
+                        temp*=mul.pop();
+                    }
                     sum.push(temp);
                     isNextMul=false;
                 }else {
@@ -75,6 +78,7 @@ public class Calculate {
     }
 
     public static void main(String[] args) {
+        System.out.println(calculate("1+2*3*4+5+6+7*8*9+10")); //550
         System.out.println(calculate("3+2*3+1*4")); //13
         System.out.println(calculate("3+3*11")); //36
         System.out.println(calculate("5+5+8"));//18
