@@ -3,19 +3,32 @@ package com.challenge;
 public class Calculate {
 
     public static int calculate(String operations){
-        String[] op= operations.split("\\+");
+        StringBuilder sb = new StringBuilder();
         int result=0;
-        for(String sum:op) {
-            result+= multiplier(sum);
+        for(char c: operations.toCharArray()){
+            if(c=='+'){
+                result+= multiplier(sb.toString());
+                sb=new StringBuilder();
+            }else{
+                sb.append(c);
+            }
         }
+        result+= multiplier(sb.toString());
         return result;
     }
     private static int multiplier(String operations){
-        String[] op= operations.split("\\*");
+        StringBuilder sb = new StringBuilder();
         int result =1;
-        for(String n: op){
-            result*=Integer.valueOf(n);
+        for(char n: operations.toCharArray()){
+            if(n=='*') {
+                result *= Integer.valueOf(sb.toString());
+                sb = new StringBuilder();
+            }else{
+                sb.append(n);
+            }
         }
+        result *= Integer.valueOf(sb.toString());
+
         return result;
     }
     public static void main(String[] args) {
