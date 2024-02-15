@@ -4,75 +4,45 @@ import java.util.*;
 
 public class Calculate {
 
-    private static HashMap<Character, Integer> dictionary;
-    private static Stack<Integer> sum= new Stack<>();
-    private static Stack<Integer> mul= new Stack<>();
-    static {
-        dictionary= new HashMap<>();
-        dictionary.put('0',0);
-        dictionary.put('1',1);
-        dictionary.put('2',2);
-        dictionary.put('3',3);
-        dictionary.put('4',4);
-        dictionary.put('5',5);
-        dictionary.put('6',6);
-        dictionary.put('7',7);
-        dictionary.put('8',8);
-        dictionary.put('9',9);
-    }
+    static Stack<Integer> sum= new Stack<>();
+    static Stack<Integer> mul= new Stack<>();
     public static int calculate(String operations){
-
-        LinkedList<Integer> value= new LinkedList<>();
-        boolean isLastSum=false, isNextMul=false;
-        for(char c: operations.toCharArray()){
-            if(c=='*'){
-                    mul.push(convert(value));
-                    value = new LinkedList<>();
-                    isLastSum = false;
-                    isNextMul = true;
-
-            }else if(c=='+'){
-                if(isNextMul){
-                    int temp=convert(value);
+        char[] characters = operations.toCharArray();
+        int beg=0, end=0, result =0;
+        for(char c :characters ){
+            if(c=='+' || c=='*'){
+                int temp =convert(Arrays.copyOfRange(characters,beg,end));
+                beg=end+1;
+                if(c=='*'){
+                    mul.push(temp);
+                }else if(c=='+' && mul.isEmpty()){
+                    sum.push(temp);
+                }else{
                     while(!mul.isEmpty()){
                         temp*=mul.pop();
                     }
                     sum.push(temp);
-                    isNextMul=false;
-                }else {
-                    sum.push(convert(value));
                 }
-                value= new LinkedList<>();
-                isLastSum=true;
-            }else{
-                value.add(dictionary.get(c));
             }
+            end++;
         }
-        if(isLastSum){
-            sum.push(convert(value));
-        }else{
-            mul.push(convert(value));
-        }
-        int result=1;
-        if(mul.isEmpty()){
-            result=0;
-        }
+        int temp = convert(Arrays.copyOfRange(characters,beg,end));
         while(!mul.isEmpty()){
-            result*=mul.pop();
+            temp*=mul.pop();
         }
-        while(!sum.isEmpty()){
+        while (!sum.isEmpty()){
             result+=sum.pop();
         }
-        return result;
+        return temp!=0? (result+temp) :result;
     }
-    private static int convert(LinkedList<Integer> num){
-        int i=0, level=1;
+
+    private static int convert(char[] num){
+        int i=num.length-1, level=1;
         int sum=0;
-        while (i<=num.size()){
-            sum+=num.getLast()*level;
+        while (i>=0){
+            sum+=(num[i]-48)*level;
             level=level*10;
-            i++;
-            num.removeLast();
+            i--;
         }
         return sum;
     }
