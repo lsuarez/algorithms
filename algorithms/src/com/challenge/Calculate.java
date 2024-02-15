@@ -5,30 +5,29 @@ import java.util.*;
 public class Calculate {
 
     static Stack<Integer> sum= new Stack<>();
-    static Stack<Integer> mul= new Stack<>();
     public static int calculate(String operations){
         char[] characters = operations.toCharArray();
         int beg=0, end=0, result =0;
+        boolean isMultiplicationBefore=false;
         for(char c :characters ){
             if(c=='+' || c=='*'){
-                int temp =convert(Arrays.copyOfRange(characters,beg,end));
+                convert(Arrays.copyOfRange(characters,beg,end));
                 beg=end+1;
+                if(isMultiplicationBefore){
+                    int temp = sum.pop()*sum.pop();
+                    sum.push(temp);
+                    isMultiplicationBefore=false;
+                }
                 if(c=='*'){
-                    mul.push(temp);
-                }else if(c=='+' && mul.isEmpty()){
-                    sum.push(temp);
-                }else{
-                    while(!mul.isEmpty()){
-                        temp*=mul.pop();
-                    }
-                    sum.push(temp);
+                    isMultiplicationBefore=true;
                 }
             }
             end++;
         }
-        int temp = convert(Arrays.copyOfRange(characters,beg,end));
-        while(!mul.isEmpty()){
-            temp*=mul.pop();
+        convert(Arrays.copyOfRange(characters,beg,end));
+        int temp =sum.pop();
+        if(isMultiplicationBefore){
+            temp*=sum.pop();
         }
         while (!sum.isEmpty()){
             result+=sum.pop();
@@ -36,15 +35,15 @@ public class Calculate {
         return temp!=0? (result+temp) :result;
     }
 
-    private static int convert(char[] num){
+    private static void convert(char[] num){
         int i=num.length-1, level=1;
-        int sum=0;
+        int n=0;
         while (i>=0){
-            sum+=(num[i]-48)*level;
+            n+=(num[i]-48)*level;
             level=level*10;
             i--;
         }
-        return sum;
+        sum.push(n);
     }
 
     public static void main(String[] args) {
