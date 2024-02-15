@@ -26,13 +26,15 @@ public class Calculate {
         boolean isLastSum=false, isNextMul=false;
         for(char c: operations.toCharArray()){
             if(c=='*'){
-                mul.push(convert(value));
-                value= new LinkedList<>();
-                isLastSum=false;
-                isNextMul=true;
+                    mul.push(convert(value));
+                    value = new LinkedList<>();
+                    isLastSum = false;
+                    isNextMul = true;
+
             }else if(c=='+'){
                 if(isNextMul){
-                    mul.push(convert(value));
+                    int temp =mul.pop()*convert(value);
+                    sum.push(temp);
                     isNextMul=false;
                 }else {
                     sum.push(convert(value));
@@ -73,9 +75,12 @@ public class Calculate {
     }
 
     public static void main(String[] args) {
+        System.out.println(calculate("3+2*3+1*4")); //13
         System.out.println(calculate("3+3*11")); //36
         System.out.println(calculate("5+5+8"));//18
         System.out.println(calculate("12*3*2"));//72
         System.out.println(calculate("30+11*56+2"));//648
+
+
     }
 }
