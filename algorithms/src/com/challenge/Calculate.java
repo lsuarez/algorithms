@@ -1,38 +1,79 @@
 package com.challenge;
 
+import java.util.*;
+
 public class Calculate {
 
+    private static HashMap<Character, Integer> dictionary;
+    private static Stack<Integer> sum= new Stack<>();
+    private static Stack<Integer> mul= new Stack<>();
+    static {
+        dictionary= new HashMap<>();
+        dictionary.put('0',0);
+        dictionary.put('1',1);
+        dictionary.put('2',2);
+        dictionary.put('3',3);
+        dictionary.put('4',4);
+        dictionary.put('5',5);
+        dictionary.put('6',6);
+        dictionary.put('7',7);
+        dictionary.put('8',8);
+        dictionary.put('9',9);
+    }
     public static int calculate(String operations){
-        StringBuilder sb = new StringBuilder();
-        int result=0;
-        for(char c: operations.toCharArray()){
-            if(c=='+'){
-                result+= multiplier(sb.toString());
-                sb=new StringBuilder();
-            }else{
-                sb.append(c);
-            }
-        }
-        result+= multiplier(sb.toString());
-        return result;
-    }
-    private static int multiplier(String operations){
-        StringBuilder sb = new StringBuilder();
-        int result =1;
-        for(char n: operations.toCharArray()){
-            if(n=='*') {
-                result *= Integer.valueOf(sb.toString());
-                sb = new StringBuilder();
-            }else{
-                sb.append(n);
-            }
-        }
-        result *= Integer.valueOf(sb.toString());
 
+        LinkedList<Integer> value= new LinkedList<>();
+        boolean isLastSum=false, isNextMul=false;
+        for(char c: operations.toCharArray()){
+            if(c=='*'){
+                mul.push(convert(value));
+                value= new LinkedList<>();
+                isLastSum=false;
+                isNextMul=true;
+            }else if(c=='+'){
+                if(isNextMul){
+                    mul.push(convert(value));
+                    isNextMul=false;
+                }else {
+                    sum.push(convert(value));
+                }
+                value= new LinkedList<>();
+                isLastSum=true;
+            }else{
+                value.add(dictionary.get(c));
+            }
+        }
+        if(isLastSum){
+            sum.push(convert(value));
+        }else{
+            mul.push(convert(value));
+        }
+        int result=1;
+        if(mul.isEmpty()){
+            result=0;
+        }
+        while(!mul.isEmpty()){
+            result*=mul.pop();
+        }
+        while(!sum.isEmpty()){
+            result+=sum.pop();
+        }
         return result;
     }
+    private static int convert(LinkedList<Integer> num){
+        int i=0, level=1;
+        int sum=0;
+        while (i<=num.size()){
+            sum+=num.getLast()*level;
+            level=level*10;
+            i++;
+            num.removeLast();
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
-        System.out.println(calculate("3+3*3")); //12
+        System.out.println(calculate("3+3*11")); //36
         System.out.println(calculate("5+5+8"));//18
         System.out.println(calculate("12*3*2"));//72
         System.out.println(calculate("30+11*56+2"));//648
