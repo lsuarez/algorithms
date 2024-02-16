@@ -4,46 +4,38 @@ import java.util.*;
 
 public class Calculate {
 
-    static Stack<Integer> sum= new Stack<>();
-    public static int calculate(String operations){
-        char[] characters = operations.toCharArray();
-        int beg=0, end=0, result =0;
-        boolean isMultiplicationBefore=false;
-        for(char c :characters ){
-            if(c=='+' || c=='*'){
-                convert(Arrays.copyOfRange(characters,beg,end));
-                beg=end+1;
-                if(isMultiplicationBefore){
-                    int temp = sum.pop()*sum.pop();
-                    sum.push(temp);
-                    isMultiplicationBefore=false;
+    public static int calculate(String s) {
+        char[] array = s.toCharArray();
+        Stack<Integer> integers = new Stack<>();
+        int readIndex=0;
+        while(readIndex<array.length){
+            if(isNumeric(array[readIndex])){
+                int number=0;
+                while(readIndex<array.length && isNumeric(array[readIndex])){
+                    number = number *10 + (array[readIndex]-'0');
+                    readIndex++;
                 }
-                if(c=='*'){
-                    isMultiplicationBefore=true;
+                integers.push(number);
+            }else if(array[readIndex]== '*'){
+                readIndex++;
+                int number=0;
+                while(readIndex<array.length && isNumeric(array[readIndex])){
+                    number = number *10 + (array[readIndex]-'0');
+                    readIndex++;
                 }
+                integers.push(integers.pop()*number);
+            }else{
+                readIndex++;
             }
-            end++;
         }
-        convert(Arrays.copyOfRange(characters,beg,end));
-        int temp =sum.pop();
-        if(isMultiplicationBefore){
-            temp*=sum.pop();
+        int result =0;
+        while(!integers.isEmpty()){
+            result+= integers.pop();
         }
-        while (!sum.isEmpty()){
-            result+=sum.pop();
-        }
-        return temp!=0? (result+temp) :result;
+        return result;
     }
-
-    private static void convert(char[] num){
-        int i=num.length-1, level=1;
-        int n=0;
-        while (i>=0){
-            n+=(num[i]-48)*level;
-            level=level*10;
-            i--;
-        }
-        sum.push(n);
+    private static boolean isNumeric(char c){
+        return c>='0' && c<='9';
     }
 
     public static void main(String[] args) {
