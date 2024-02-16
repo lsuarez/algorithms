@@ -51,6 +51,7 @@ public class SortWithRecursion {
         for (int i = 0; i < a.length - 1; i++) {
             a[i] = r.nextInt(599);
         }
+        System.out.println(Arrays.toString(a));
         a = sort(a);
         System.out.println(Arrays.toString(a));
 
