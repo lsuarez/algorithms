@@ -59,7 +59,7 @@ public class AdsKthPosition {
 
 
     /*
-    BigO->N
+    BigO->n+2k -> n
      */
     public static void main(String[] args) {
         List<String> data= new ArrayList<>();

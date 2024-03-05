@@ -1,0 +1,5 @@
+*.class
+# IDEA config files
+.idea/
+*.iml
+out/production/*.class
